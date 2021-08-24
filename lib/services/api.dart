@@ -11,14 +11,15 @@ class Api {
     Api._internal();
 
     String token ;
-    String baseUrl = '195.4.160.243';
-    String path = 'atevChatApp/public/api';
+    String devUrl = '192.168.0.21';
+    String liveUrl = '195.4.160.243';
+    String path = 'atev-laravel-backend/public/api';
 
     Future<http.Response> httpGet(String endPath,{Map<String, String> query}){
-        Uri url = Uri.http(baseUrl, '$path/$endPath');
+        Uri url = Uri.http(devUrl, '$path/$endPath');
 
         if(query != null){
-            url = Uri.http(baseUrl, '$path/$endPath', query);
+            url = Uri.http(devUrl, '$path/$endPath', query);
         }
         return http.get(url, headers: {
             'Authorization': 'Bearer $token',
@@ -27,7 +28,7 @@ class Api {
     }
 
     Future<http.Response> httpPost(String endPath,Object body){
-        Uri url = Uri.http(baseUrl, '$path/$endPath');
+        Uri url = Uri.http(devUrl, '$path/$endPath');
 
         return http.post(url,body: body, headers: {
             'Authorization': 'Bearer $token',
@@ -39,7 +40,7 @@ class Api {
       'Authorization': 'Bearer $token',
       'Accept': 'application/json',
     };
-    var uri = Uri.parse("http://${this.baseUrl}/${this.path}/$endPath");
+    var uri = Uri.parse("http://${this.devUrl}/${this.path}/$endPath");
     var length = await file.length();
     http.MultipartRequest request = new http.MultipartRequest('POST', uri)
       ..headers.addAll(headers)
