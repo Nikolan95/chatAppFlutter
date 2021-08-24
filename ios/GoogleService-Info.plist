@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>637165789008-r78q4k80q2djoqcdbda2klv17t5fd3n4.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.637165789008-r78q4k80q2djoqcdbda2klv17t5fd3n4</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAxIeWf8FUAk-PoLx--7zFTefBjg-_WxnM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>637165789008</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.atev.chat.ios</string>
+	<key>PROJECT_ID</key>
+	<string>atev-chat</string>
+	<key>STORAGE_BUCKET</key>
+	<string>atev-chat.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:637165789008:ios:98ba8095c10b0ec3a89655</string>
+</dict>
+</plist>
