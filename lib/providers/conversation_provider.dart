@@ -60,7 +60,7 @@ class ConversationProvider extends BaseProvider{
   Future<void> storeConversation(String userId, String message, String carId) async {
     setBusy(true);
     var response = await _conversationService.newConversation(userId, message, carId);
-    //print(response.body);
+    print(response.body);
      if(response.statusCode == 201){
        var response = await _conversationService.getLastConversation();
 

@@ -66,6 +66,7 @@ class _MainScreenState extends State<MainScreen> {
       RemoteNotification notification = message.notification;
       AndroidNotification android = message.notification?.android;
             handleNotification(message.data['message'], false);
+            return null;
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {

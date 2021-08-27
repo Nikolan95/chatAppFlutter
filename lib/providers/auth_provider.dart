@@ -61,18 +61,20 @@ class AuthProvider extends BaseProvider{
     _api.token = token;
   }
   Future<bool> login(String email, password)async{
-     setBusy(true);
+    setBusy(true);
     var response = await _authService.login(email.trim(), password.trim());
     print(response.statusCode);
     print(response.body);
-    var data = jsonDecode(response.body);
+    //var data = jsonDecode(response.body);
+    String data = (response.body).toString();
     if (response.statusCode == 200) {
-      saveToken(data['access_token']);
+      //saveToken(data['access_token']);
+      saveToken(data);
       getUser();
       setBusy(false);
       return true;
     } else if (response.statusCode == 400) {
-      setMessage(data['erro']);
+      setMessage('error');
       return false;
     }
     setBusy(false);

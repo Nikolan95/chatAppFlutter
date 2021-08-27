@@ -91,22 +91,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     TextFormField(
                       //initialValue: '${provider.user.name}',
-                      decoration: Style.inputDecoration('Nachername'),
-                      validator: (v) {
-                        if (v.isEmpty) {
-                          return 'Nachername field is empty';
-                        } else
-                          return null;
-                      },
-                      onSaved: (v){
-                        provider.user.surname = v.trim();
-                      },
-                    ),
-                    SizedBox(
-                      height: SizeConfig.blockSizeHorizontal * 4,
-                    ),
-                    TextFormField(
-                      //initialValue: '${provider.user.name}',
                       decoration: Style.inputDecoration('Unternehmen'),
                       validator: (v) {
                         if (v.isEmpty) {
@@ -163,7 +147,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           return null;
                       },
                       onSaved: (v){
-                        provider.user.telefon = v.trim();
+                        provider.user.phoneNumber = v.trim();
                       },
                     ),
                     SizedBox(

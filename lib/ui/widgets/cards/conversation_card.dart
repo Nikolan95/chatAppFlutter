@@ -21,7 +21,7 @@ class ConversationCard extends StatelessWidget {
         // if((message.userId != provider.user.id)){
         //   print(message.toJson());
         // }
-        print(message.toJson());
+        //print(message.toJson());
     }
     return ListTile(
       onTap: onTap,

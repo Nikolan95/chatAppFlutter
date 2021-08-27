@@ -7,13 +7,11 @@ class UserService extends BaseApi {
   Future<http.Response> updateUser(UserModel user) async {
     return await api
         .httpPost('update', {
-          'email': user.email, 
           'name': user.name,
-          'surname': user.surname,
           'company': user.company,
           'street': user.street,
           'city': user.city,
-          'telefon': user.telefon,
+          'phoneNumber': user.phoneNumber,
         });
   }
 

@@ -90,22 +90,6 @@ class EditProfileScreen extends StatelessWidget {
                       height: SizeConfig.blockSizeHorizontal * 4,
                     ),
                     TextFormField(
-                      initialValue: '${provider.user.surname}',
-                        decoration: Style.inputDecoration('Surname'),
-                        validator: (v) {
-                          if (v.isEmpty) {
-                            return 'input require';
-                          } else
-                            return null;
-                        },
-                        onSaved: (v) {
-                          provider.user.surname = v.trim();
-                        },
-                    ),
-                    SizedBox(
-                      height: SizeConfig.blockSizeHorizontal * 4,
-                    ),
-                    TextFormField(
                       initialValue: '${provider.user.company}',
                         decoration: Style.inputDecoration('Company'),
                         validator: (v) {
@@ -154,7 +138,7 @@ class EditProfileScreen extends StatelessWidget {
                       height: SizeConfig.blockSizeHorizontal * 4,
                     ),
                     TextFormField(
-                      initialValue: '${provider.user.telefon}',
+                      initialValue: '${provider.user.phoneNumber}',
                         decoration: Style.inputDecoration('Telefon'),
                         validator: (v) {
                           if (v.isEmpty) {
@@ -163,7 +147,7 @@ class EditProfileScreen extends StatelessWidget {
                             return null;
                         },
                         onSaved: (v) {
-                          provider.user.telefon = v.trim();
+                          provider.user.phoneNumber = v.trim();
                         },
                     ),
                     SizedBox(
@@ -187,7 +171,7 @@ class EditProfileScreen extends StatelessWidget {
                 var result = await provider.updateUser();
                 if (!result) {
                   _scafoldKey.currentState.showSnackBar(SnackBar(
-                    content: Text(Provider.of<UserProvider>(context).message),
+                    content: Text(Provider.of<UserProvider>(context, listen: false).message),
                   )
                   );
                   print('error');

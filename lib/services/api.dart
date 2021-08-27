@@ -10,10 +10,13 @@ class Api {
     }
     Api._internal();
 
-    String token ;
-    String devUrl = '192.168.0.21';
+    String token;
+    //Android
+    String devUrl = '10.0.2.2:8000';
+    //IOS
+    //String devUrl = 'localhost:8000';
     String liveUrl = '195.4.160.243';
-    String path = 'atev-laravel-backend/public/api';
+    String path = '/api';
 
     Future<http.Response> httpGet(String endPath,{Map<String, String> query}){
         Uri url = Uri.http(devUrl, '$path/$endPath');

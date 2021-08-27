@@ -94,39 +94,6 @@ class ProfileScreen extends StatelessWidget {
                         Container(
                           margin: EdgeInsets.only(left: 30, top: 5),
                           child: Text(
-                            'Nachername',
-                            style: TextStyle(
-                              fontSize: 16,
-                            ),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(left: 30, top: 5, bottom: 5),
-                          child: Text(
-                            provider.user.surname,
-                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(
-              child: Card(
-                elevation: 5,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)
-                    ),
-                child: Row(
-                  children: <Widget>[
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Container(
-                          margin: EdgeInsets.only(left: 30, top: 5),
-                          child: Text(
                             'Unternehmen',
                             style: TextStyle(
                               fontSize: 16,
@@ -235,7 +202,7 @@ class ProfileScreen extends StatelessWidget {
                         Container(
                           margin: EdgeInsets.only(left: 30, top: 5, bottom: 5),
                           child: Text(
-                            provider.user.telefon,
+                            provider.user.phoneNumber,
                             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                         ),

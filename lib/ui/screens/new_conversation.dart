@@ -41,7 +41,7 @@ class _NewConversationState extends State<NewConversation>{
         borderRadius: BorderRadius.all(Radius.circular(20)),
       ),
     );
-    final userId = 7;
+    final userId = 1;
     final messageController = TextEditingController();
      void submitData() async {
       final enteredUserId = userId;

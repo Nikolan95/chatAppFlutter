@@ -9,19 +9,18 @@ class AuthService extends BaseApi{
   return await api.httpGet('user');
   }
   Future<http.Response> login(String email, password)async{
-    return await api.httpPost('login', {'email': email, 'password': password});
+    return await api.httpPost('sanctum/token', {'email': email, 'password': password});
   }
   Future<http.Response> register(UserModel user) async {
     return await api.httpPost('register',
       {
         'email': user.email, 
         'password': user.password, 
-        'name': user.name, 
-        'surname': user.surname, 
+        'name': user.name,
         'company': user.company, 
         'street': user.street, 
         'city': user.city, 
-        'telefon': user.telefon 
+        'telefon': user.phoneNumber 
       });
   }
   Future<http.Response> logout() async {

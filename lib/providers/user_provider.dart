@@ -41,15 +41,15 @@ class UserProvider extends BaseProvider {
 
   Future<void> pickImage() async {
     var image = await ImagePicker.pickImage(source: ImageSource.gallery);
-    //print(image);
+    print(image);
     // return;
     var response = await _userService.uploadImage(image);
-    //print(response.body);
+    print(response.body);
     var data = jsonDecode(response.body);
     if (response.statusCode == 200) {
       print(data);
       setUser(UserModel.fromJson(data['data']));
-      //print(_user.toJson());
+      print(_user.toJson());
       setBusy(false);
       return true;
     }
