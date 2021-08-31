@@ -20,8 +20,15 @@ class ProfileScreen extends StatelessWidget {
     );
 
     SizeConfig().init(context);
-    return Scaffold(
-      backgroundColor: Colors.black,
+    return Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: Image.asset("assets/background.png").image,
+            fit: BoxFit.cover,
+          ),
+        ),
+    child: Scaffold(
+      backgroundColor: Colors.transparent,
       body: SingleChildScrollView(
         child: Column(
           //mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -223,7 +230,7 @@ class ProfileScreen extends StatelessWidget {
             )),
           ],
         ),
-      ),
+      ),)
     );
   }
 }

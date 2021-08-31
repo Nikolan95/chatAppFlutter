@@ -57,8 +57,15 @@ class _CarScreenPageState extends State<CarScreen>{
         borderRadius: BorderRadius.all(Radius.circular(20)),
       ),
     );
-    return Scaffold(
-      backgroundColor: Colors.black,
+    return Container(
+        decoration: BoxDecoration(
+        image: DecorationImage(
+        image: Image.asset("assets/background.png").image,
+    fit: BoxFit.cover,
+    ),
+    ),
+    child: Scaffold(
+    backgroundColor: Colors.transparent,
       body:SingleChildScrollView(
           child: Column(
               //mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -92,7 +99,8 @@ class _CarScreenPageState extends State<CarScreen>{
                 CarList(provider.user.cars),
               ],
             ),
-        ),    
+        ),
+    ),
     );     
     
   }

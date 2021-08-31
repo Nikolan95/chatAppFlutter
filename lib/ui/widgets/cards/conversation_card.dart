@@ -49,7 +49,9 @@ class ConversationCard extends StatelessWidget {
           ),
         ],
       ),
-      subtitle: Text(conversation.messages.first.body),
+      subtitle: Text(conversation.messages.last.body != null
+                ? conversation.messages.last.body
+                : 'document'),
     );
   }
 }

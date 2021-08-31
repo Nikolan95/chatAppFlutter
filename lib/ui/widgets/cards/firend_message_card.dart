@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'dart:typed_data';
 
 import 'package:chat_app/models/message_model.dart';
+import 'package:chat_app/ui/screens/offers/offer_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_bubble/bubble_type.dart';
 import 'package:flutter_chat_bubble/chat_bubble.dart';
@@ -48,6 +49,10 @@ class FriendMessageCard extends StatelessWidget {
             backGroundColor: Color(343438),
             margin: EdgeInsets.only(top: 20),
             padding: EdgeInsets.all(15),
+
+
+
+
             child: message.body != null ? Container(
               constraints: BoxConstraints(
                 maxWidth: MediaQuery.of(context).size.width * 0.7,
@@ -56,8 +61,22 @@ class FriendMessageCard extends StatelessWidget {
                 '${message.body}',
                 style: TextStyle(color: Colors.white),
               ),
-            ) : Container(
-                child: Image.memory(base64decode(message.image), scale: 5,)
+            )
+            : message.offerItems.length > 0 ? Container(
+                  child: IconButton(
+                  icon: new Icon(Icons.file_copy),
+                  onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                  builder: (context) => OfferItemScreen(),
+                  settings: RouteSettings(
+                  arguments: message,
+                  ),
+                  ),
+                  )
+            ))
+                : Container(
+                child: Image.memory(base64decode(message.image), scale: 5)
             )
           )
         ],

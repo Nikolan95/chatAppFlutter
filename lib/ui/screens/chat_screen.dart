@@ -38,8 +38,15 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
+    return Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: Image.asset("assets/background.png").image,
+            fit: BoxFit.cover,
+          ),
+        ),
+     child: Scaffold(
+      backgroundColor: Colors.transparent,
       appBar: AppBar(
         leading: IconButton(
           onPressed: () => Navigator.of(context).pop(),
@@ -124,6 +131,7 @@ class _ChatScreenState extends State<ChatScreen> {
           ),
         ],
       ),
+     ),
     );
   }
 }

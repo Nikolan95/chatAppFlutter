@@ -30,8 +30,15 @@ class _ConversationScreenState extends State<ConversationScreen> {
     SizeConfig().init(context);
     var provider = Provider.of<ConversationProvider>(context);
     var cars = Provider.of<UserProvider>(context).user;
-    return Scaffold(
-      backgroundColor: Colors.black,
+    return Container(
+        decoration: BoxDecoration(
+        image: DecorationImage(
+        image: Image.asset("assets/background.png").image,
+    fit: BoxFit.cover,
+    ),
+    ),
+    child: Scaffold(
+    backgroundColor: Colors.transparent,
       body:SingleChildScrollView(
           child: Column(
               //mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -85,7 +92,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
         child: const Icon(Icons.add),
         backgroundColor: Colors.yellow[700],
       ), 
-        
+    ),
       );
   }
 }

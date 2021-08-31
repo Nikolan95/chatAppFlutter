@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'offeritem_model.dart';
 
 class MessageModel   {
   int id;
@@ -9,16 +10,19 @@ class MessageModel   {
   String createdAt;
   String updatedAt;
   String image;
+  List<OfferItemModel> offerItems;
 
-  MessageModel  (
-      {this.id,
-      this.body,
-      this.read,
-      this.userId,
-      this.conversationId,
-      this.createdAt,
-      this.updatedAt,
-      this.image});
+  MessageModel  ({
+    this.id,
+    this.body,
+    this.read,
+    this.userId,
+    this.conversationId,
+    this.createdAt,
+    this.updatedAt,
+    this.image,
+    this.offerItems
+  });
 
   MessageModel  .fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -29,6 +33,13 @@ class MessageModel   {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     image = json['image'];
+    if (json['offeritems'] != null) {
+      offerItems = new List<OfferItemModel>();
+      //List<MessageModel> messages = [];
+      json['offeritems'].forEach((v) {
+        offerItems.add(new OfferItemModel.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {

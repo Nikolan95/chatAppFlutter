@@ -32,9 +32,16 @@ class _LoginScreenState extends State<LoginScreen>{
   @override
   Widget build(BuildContext context){
     SizeConfig().init(context);
-    return Scaffold(
+    return Container(
+        decoration: BoxDecoration(
+        image: DecorationImage(
+        image: Image.asset("assets/background.png").image,
+    fit: BoxFit.cover,
+    ),
+    ),
+    child: Scaffold(
+    backgroundColor: Colors.transparent,
       key: _scafoldKey,
-      backgroundColor: Style.darkColor,
       body: ListView(
         children: <Widget>[
           SizedBox(
@@ -114,6 +121,7 @@ class _LoginScreenState extends State<LoginScreen>{
           ),
         ),
       ),
+    ),
     );
   }
 }

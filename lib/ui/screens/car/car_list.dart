@@ -25,7 +25,6 @@ class CarList extends StatelessWidget {
           
           itemBuilder: (car, index){
             return SizedBox(
-              
               child: Card(
                 elevation: 5,
                 shape: RoundedRectangleBorder(
