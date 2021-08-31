@@ -1,3 +1,5 @@
+import 'offeritem_model.dart';
+
 class MessageModel   {
   int id;
   String body;
@@ -6,6 +8,7 @@ class MessageModel   {
   int conversationId;
   String createdAt;
   String updatedAt;
+    List<OfferItemModel> offerItems;
 
   MessageModel  (
       {this.id,
@@ -14,7 +17,8 @@ class MessageModel   {
       this.userId,
       this.conversationId,
       this.createdAt,
-      this.updatedAt});
+      this.updatedAt,
+      this.offerItems});
 
   MessageModel  .fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -24,6 +28,13 @@ class MessageModel   {
     conversationId = json['conversation_id'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    if (json['offeritems'] != null) {
+      offerItems = new List<OfferItemModel>();
+      //List<MessageModel> messages = [];
+      json['offeritems'].forEach((v) {
+        offerItems.add(new OfferItemModel.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
