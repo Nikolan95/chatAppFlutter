@@ -49,7 +49,7 @@ class ConversationCard extends StatelessWidget {
           ),
         ],
       ),
-      subtitle: Text(conversation.messages.last.body),
+      subtitle: Text(conversation.messages.first.body),
     );
   }
 }

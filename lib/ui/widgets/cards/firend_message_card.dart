@@ -1,3 +1,7 @@
+import 'dart:convert';
+import 'dart:ffi';
+import 'dart:typed_data';
+
 import 'package:chat_app/models/message_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_bubble/bubble_type.dart';
@@ -13,6 +17,15 @@ class FriendMessageCard extends StatelessWidget {
     this.message,
     this.imageUrl,
   }) : super(key: key);
+
+
+  Uint8List base64decode(String image){
+    //Codec<String, String> stringToBase64 = utf8.fuse(base64);
+    //Uint8List _image =  base64Decode(image);
+    //var blob = yourJSONMapHere[image];
+    var _image = base64.decode(image);
+    return _image;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +48,7 @@ class FriendMessageCard extends StatelessWidget {
             backGroundColor: Color(343438),
             margin: EdgeInsets.only(top: 20),
             padding: EdgeInsets.all(15),
-            child: Container(
+            child: message.body != null ? Container(
               constraints: BoxConstraints(
                 maxWidth: MediaQuery.of(context).size.width * 0.7,
               ),
@@ -43,7 +56,9 @@ class FriendMessageCard extends StatelessWidget {
                 '${message.body}',
                 style: TextStyle(color: Colors.white),
               ),
-            ),
+            ) : Container(
+                child: Image.memory(base64decode(message.image), scale: 5,)
+            )
           )
         ],
       ),

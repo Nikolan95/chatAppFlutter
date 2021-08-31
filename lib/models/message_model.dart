@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 class MessageModel   {
   int id;
   String body;
@@ -6,6 +8,7 @@ class MessageModel   {
   int conversationId;
   String createdAt;
   String updatedAt;
+  String image;
 
   MessageModel  (
       {this.id,
@@ -14,7 +17,8 @@ class MessageModel   {
       this.userId,
       this.conversationId,
       this.createdAt,
-      this.updatedAt});
+      this.updatedAt,
+      this.image});
 
   MessageModel  .fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -24,6 +28,7 @@ class MessageModel   {
     conversationId = json['conversation_id'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    image = json['image'];
   }
 
   Map<String, dynamic> toJson() {
@@ -35,6 +40,7 @@ class MessageModel   {
     data['conversation_id'] = this.conversationId;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
+    data['image'] = this.image;
     return data;
   }
 }
