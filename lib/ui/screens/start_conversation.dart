@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:chat_app/providers/conversation_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../style.dart';
 import 'main_screen.dart';
 
 class StartConversation extends StatelessWidget {
@@ -16,7 +17,7 @@ class StartConversation extends StatelessWidget {
   Widget build(BuildContext context) {
     final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
       onPrimary: Colors.white,
-      primary: Colors.yellow[700],
+      primary: Style.primaryColor,
       minimumSize: Size(88, 36),
       padding: EdgeInsets.symmetric(horizontal: 16),
       shape: const RoundedRectangleBorder(
@@ -63,7 +64,7 @@ class StartConversation extends StatelessWidget {
               child: Container(
                 height: 2.0,
                 width: 500.0,
-                color: Colors.yellow[700],
+                color: Style.primaryColor,
               ),
             ),
             Container(

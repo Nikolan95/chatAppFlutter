@@ -135,49 +135,49 @@ class _MainScreenState extends State<MainScreen> {
         inkColor: Colors.black12, //optional, uses theme color if not specified
         items: <BubbleBottomBarItem>[
           BubbleBottomBarItem(
-              backgroundColor: Colors.yellow,
+              backgroundColor: Style.primaryColor,
               icon: Icon(
                 Icons.home,
                 color: Colors.white,
               ),
               activeIcon: Icon(
                 Icons.message,
-                color: Colors.yellow,
+                color: Style.primaryColor,
               ),
-              title: Text("Home")),
+              title: Text("Chats")),
           BubbleBottomBarItem(
-              backgroundColor: Colors.yellow,
+              backgroundColor: Style.primaryColor,
               icon: Icon(
                 Icons.car_repair,
                 color: Colors.white,
               ),
               activeIcon: Icon(
                 Icons.car_repair,
-                color: Colors.yellow,
+                color: Style.primaryColor,
               ),
-              title: Text("My Cars")),
+              title: Text("Fahrzeuge")),
           BubbleBottomBarItem(
-              backgroundColor: Colors.yellow,
+              backgroundColor: Style.primaryColor,
               icon: Icon(
                 Icons.people,
                 color: Colors.white,
               ),
               activeIcon: Icon(
                 Icons.people,
-                color: Colors.yellow,
+                color: Style.primaryColor,
               ),
-              title: Text("Friends")),
+              title: Text("Freunde")),
           BubbleBottomBarItem(
-              backgroundColor: Colors.yellow,
+              backgroundColor: Style.primaryColor,
               icon: Icon(
                 Icons.person,
                 color: Colors.white,
               ),
               activeIcon: Icon(
                 Icons.person,
-                color: Colors.yellow,
+                color: Style.primaryColor,
               ),
-              title: Text("Profile")),
+              title: Text("Profil")),
         ],
       ),
     );

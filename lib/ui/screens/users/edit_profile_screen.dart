@@ -21,7 +21,7 @@ class EditProfileScreen extends StatelessWidget {
     var provider = Provider.of<UserProvider>(context);
     final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
       onPrimary: Colors.white,
-      primary: Colors.yellow[700],
+      primary: Style.primaryColor,
       minimumSize: Size(88, 36),
       padding: EdgeInsets.symmetric(horizontal: 16),
       shape: const RoundedRectangleBorder(
@@ -57,7 +57,7 @@ class EditProfileScreen extends StatelessWidget {
               child: Container(
                 height: 2.0,
                 width: 500.0,
-                color: Colors.yellow[700],
+                color: Style.primaryColor,
               ),
             ),
             Container(

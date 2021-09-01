@@ -3,6 +3,7 @@ import 'package:chat_app/ui/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../style.dart';
 import 'edit_profile_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -11,7 +12,7 @@ class ProfileScreen extends StatelessWidget {
     var provider = Provider.of<UserProvider>(context);
     final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
       onPrimary: Colors.white,
-      primary: Colors.yellow[700],
+      primary: Style.primaryColor,
       minimumSize: Size(88, 36),
       padding: EdgeInsets.symmetric(horizontal: 16),
       shape: const RoundedRectangleBorder(
@@ -44,7 +45,7 @@ class ProfileScreen extends StatelessWidget {
               child: Container(
                 height: 2.0,
                 width: 500.0,
-                color: Colors.yellow[700],
+                color: Style.primaryColor,
               ),
             ),
             Container(

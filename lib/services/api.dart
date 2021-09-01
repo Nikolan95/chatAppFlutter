@@ -12,9 +12,9 @@ class Api {
 
     String token;
     //Android
-    String devUrl = '10.0.2.2:8000';
+    //String devUrl = '10.0.2.2:8000';
     //IOS
-    //String devUrl = 'localhost:8000';
+    String devUrl = 'localhost:8000';
     String liveUrl = '195.4.160.243';
     String path = '/api';
 
