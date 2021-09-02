@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../style.dart';
 import 'car_list.dart';
+import 'car_edit.dart';
+import 'car_add.dart';
 
 class CarScreen extends StatefulWidget  {
   //var _cars = List<CarList>();
@@ -34,15 +36,16 @@ class _CarScreenPageState extends State<CarScreen>{
 
   
   void _startAddNewCar(BuildContext ctx){
+    /*
     showModalBottomSheet(
-      context: ctx, 
+      context: ctx,
       builder: (_) {
       return GestureDetector(
         onTap: () {},
         child: NewCar(_addNewCar),
         behavior: HitTestBehavior.opaque,
       );
-    },);
+    },);*/
   }
 
   
@@ -79,14 +82,14 @@ class _CarScreenPageState extends State<CarScreen>{
                   )
                 ),
                Padding(
-                    padding:EdgeInsets.only(bottom: 20),
+                    padding:EdgeInsets.only(bottom: 25),
                     child:Container(
                     height:2.0,
                     width:500.0,
                     color:Style.primaryColor),
                 ),
                 Container(
-                  height: 50,
+                  height: 40,
                   child: Text(
                     'Meine Fahrzeuge',
                     style: TextStyle(fontSize: 20),
@@ -96,7 +99,8 @@ class _CarScreenPageState extends State<CarScreen>{
                   child: 
                   ElevatedButton(
                     style: raisedButtonStyle,
-                    onPressed: () => _startAddNewCar(context),
+                    onPressed: () => Navigator.of(context).push(
+                        MaterialPageRoute(builder: (_) => CarAdd())),
                     child: Text('Neues Fahrung hinzufügen'),
                   )
                 ),

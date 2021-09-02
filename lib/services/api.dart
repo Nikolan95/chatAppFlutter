@@ -10,13 +10,17 @@ class Api {
     }
     Api._internal();
 
-    String token;
-    //Android
+    //IOS Simulator
+    //String devUrl = 'localhost:8000';
+
+    //Android Simulator
     //String devUrl = '10.0.2.2:8000';
-    //IOS
+
+    //Live
     String devUrl = 'app.atev.de';
-    String liveUrl = '195.4.160.243';
+
     String path = '/api';
+    String token;
 
     Future<http.Response> httpGet(String endPath,{Map<String, String> query}){
         Uri url = Uri.https(devUrl, '$path/$endPath');

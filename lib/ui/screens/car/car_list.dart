@@ -13,8 +13,8 @@ class CarList extends StatelessWidget {
   Widget build(BuildContext context) {
     //var provider = Provider.of<UserProvider>(context);
     return Container(
-      height: 360,
-      padding: EdgeInsets.all(15),
+        height: 420,
+        padding: EdgeInsets.all(15),
       // decoration: BoxDecoration(
       //   border: Border.all(
       //     color: Colors.red[500],
