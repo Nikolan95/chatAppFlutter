@@ -87,14 +87,17 @@ class _CarScreenPageState extends State<CarScreen>{
                 ),
                 Container(
                   height: 50,
-                  child: Text('Fahrzeuge', style: TextStyle(fontSize: 20),),
+                  child: Text(
+                    'Meine Fahrzeuge',
+                    style: TextStyle(fontSize: 20),
+                  ),
                 ),
                 Container(
                   child: 
                   ElevatedButton(
                     style: raisedButtonStyle,
                     onPressed: () => _startAddNewCar(context),
-                    child: Text('Neues Fahrung erstellen'),
+                    child: Text('Neues Fahrung hinzufügen'),
                   )
                 ),
                 CarList(provider.user.cars),

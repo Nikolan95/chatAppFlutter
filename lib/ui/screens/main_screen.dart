@@ -113,9 +113,6 @@ class _MainScreenState extends State<MainScreen> {
         children: <Widget>[
           ConversationScreen(),
           CarScreen(),
-          Container(
-            color: Colors.green,
-          ),
           ProfileScreen()
         ],
       ),
@@ -156,17 +153,6 @@ class _MainScreenState extends State<MainScreen> {
                 color: Style.primaryColor,
               ),
               title: Text("Fahrzeuge")),
-          BubbleBottomBarItem(
-              backgroundColor: Style.primaryColor,
-              icon: Icon(
-                Icons.people,
-                color: Colors.white,
-              ),
-              activeIcon: Icon(
-                Icons.people,
-                color: Style.primaryColor,
-              ),
-              title: Text("Freunde")),
           BubbleBottomBarItem(
               backgroundColor: Style.primaryColor,
               icon: Icon(
