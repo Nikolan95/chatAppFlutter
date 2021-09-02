@@ -28,160 +28,147 @@ class EditProfileScreen extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(20)),
       ),
     );
-    return Scaffold(
-        key: _scafoldKey,
-        appBar: AppBar(
-          leading: IconButton(
-            onPressed: () => Navigator.of(context).pop(),
-            icon: Icon(Icons.arrow_back_ios),
+    return Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: Image.asset("assets/background.png").image,
+            fit: BoxFit.cover,
+            ),
           ),
-          title: Text('Profile'),
-          centerTitle: true,
-        ),
-        body: provider.busy
-            ? Center(
-                child: CircularProgressIndicator(),
-              )
-            : SingleChildScrollView(
-        child: Column(
-          //mainAxisAlignment: MainAxisAlignment.spaceAround,
-          //crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Container(
-                margin: EdgeInsets.only(top: 35, bottom: 15),
-                child: Image.asset(
-                  'assets/logo-atev-white.png',
-                )),
-            Padding(
-              padding: EdgeInsets.only(bottom: 20),
-              child: Container(
-                height: 2.0,
-                width: 500.0,
-                color: Style.primaryColor,
-              ),
+      child: Scaffold(
+          backgroundColor: Colors.transparent,
+          key: _scafoldKey,
+          appBar: AppBar(
+            leading: IconButton(
+              onPressed: () => Navigator.of(context).pop(),
+              icon: Icon(Icons.arrow_back_ios),
             ),
-            Container(
-              height: 50,
-              child: Text(
-                'Meine Daten',
-                style: TextStyle(fontSize: 20),
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: SizeConfig.blockSizeHorizontal * 4),
-              child:  Form(
-                key: _key,
-                child: Column(
-                  children: <Widget>[
-                    TextFormField(
-                      initialValue: '${provider.user.name}',
-                        decoration: Style.inputDecoration('Name'),
-                        validator: (v) {
-                          if (v.isEmpty) {
-                            return 'input require';
-                          } else
-                            return null;
-                        },
-                        onSaved: (v) {
-                          provider.user.name = v.trim();
-                        },
-                    ),
-                    SizedBox(
-                      height: SizeConfig.blockSizeHorizontal * 4,
-                    ),
-                    TextFormField(
-                      initialValue: '${provider.user.company}',
-                        decoration: Style.inputDecoration('Company'),
-                        validator: (v) {
-                          if (v.isEmpty) {
-                            return 'input require';
-                          } else
-                            return null;
-                        },
-                        onSaved: (v) {
-                          provider.user.company = v.trim();
-                        },
-                    ),
-                    SizedBox(
-                      height: SizeConfig.blockSizeHorizontal * 4,
-                    ),
-                    TextFormField(
-                      initialValue: '${provider.user.street}',
-                        decoration: Style.inputDecoration('Street'),
-                        validator: (v) {
-                          if (v.isEmpty) {
-                            return 'input require';
-                          } else
-                            return null;
-                        },
-                        onSaved: (v) {
-                          provider.user.street = v.trim();
-                        },
-                    ),
-                    SizedBox(
-                      height: SizeConfig.blockSizeHorizontal * 4,
-                    ),
-                    TextFormField(
-                      initialValue: '${provider.user.city}',
-                        decoration: Style.inputDecoration('City'),
-                        validator: (v) {
-                          if (v.isEmpty) {
-                            return 'input require';
-                          } else
-                            return null;
-                        },
-                        onSaved: (v) {
-                          provider.user.city = v.trim();
-                        },
-                    ),
-                    SizedBox(
-                      height: SizeConfig.blockSizeHorizontal * 4,
-                    ),
-                    TextFormField(
-                      initialValue: '${provider.user.phoneNumber}',
-                        decoration: Style.inputDecoration('Telefon'),
-                        validator: (v) {
-                          if (v.isEmpty) {
-                            return 'input require';
-                          } else
-                            return null;
-                        },
-                        onSaved: (v) {
-                          provider.user.phoneNumber = v.trim();
-                        },
-                    ),
-                    SizedBox(
-                      height: SizeConfig.blockSizeHorizontal * 4,
-                    ),
-                  ],
+            title: Text('Daten bearbeiten'),
+            centerTitle: true,
+          ),
+          body: provider.busy
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : SingleChildScrollView(
+          child: Column(
+            //mainAxisAlignment: MainAxisAlignment.spaceAround,
+            //crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.only(top: 40, bottom: 15),
+                padding: EdgeInsets.symmetric(horizontal: SizeConfig.blockSizeHorizontal * 4),
+                child:  Form(
+                  key: _key,
+                  child: Column(
+                    children: <Widget>[
+                      TextFormField(
+                        initialValue: '${provider.user.name}',
+                          decoration: Style.inputDecoration('Name'),
+                          validator: (v) {
+                            if (v.isEmpty) {
+                              return 'input require';
+                            } else
+                              return null;
+                          },
+                          onSaved: (v) {
+                            provider.user.name = v.trim();
+                          },
+                      ),
+                      SizedBox(
+                        height: SizeConfig.blockSizeHorizontal * 6,
+                      ),
+                      TextFormField(
+                        initialValue: '${provider.user.company}',
+                          decoration: Style.inputDecoration('Company'),
+                          validator: (v) {
+                            if (v.isEmpty) {
+                              return 'input require';
+                            } else
+                              return null;
+                          },
+                          onSaved: (v) {
+                            provider.user.company = v.trim();
+                          },
+                      ),
+                      SizedBox(
+                        height: SizeConfig.blockSizeHorizontal * 6,
+                      ),
+                      TextFormField(
+                        initialValue: '${provider.user.street}',
+                          decoration: Style.inputDecoration('Street'),
+                          validator: (v) {
+                            if (v.isEmpty) {
+                              return 'input require';
+                            } else
+                              return null;
+                          },
+                          onSaved: (v) {
+                            provider.user.street = v.trim();
+                          },
+                      ),
+                      SizedBox(
+                        height: SizeConfig.blockSizeHorizontal * 6,
+                      ),
+                      TextFormField(
+                        initialValue: '${provider.user.city}',
+                          decoration: Style.inputDecoration('City'),
+                          validator: (v) {
+                            if (v.isEmpty) {
+                              return 'input require';
+                            } else
+                              return null;
+                          },
+                          onSaved: (v) {
+                            provider.user.city = v.trim();
+                          },
+                      ),
+                      SizedBox(
+                        height: SizeConfig.blockSizeHorizontal * 6,
+                      ),
+                      TextFormField(
+                        initialValue: '${provider.user.phoneNumber}',
+                          decoration: Style.inputDecoration('Telefon'),
+                          validator: (v) {
+                            if (v.isEmpty) {
+                              return 'input require';
+                            } else
+                              return null;
+                          },
+                          onSaved: (v) {
+                            provider.user.phoneNumber = v.trim();
+                          },
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-           
-            Container(
-              margin: EdgeInsets.only(top: 15),
-              width: 200,
-                child: ElevatedButton(
-              style: raisedButtonStyle,
-              onPressed: () async {
-              if (_key.currentState.validate()) {
-                _key.currentState.save();
-                // print(provider.user.toJson());
-                // return;
-                var result = await provider.updateUser();
-                if (!result) {
-                  _scafoldKey.currentState.showSnackBar(SnackBar(
-                    content: Text(Provider.of<UserProvider>(context, listen: false).message),
-                  )
-                  );
-                  print('error');
-                }
-              } else
-                print('is not validate');
-            },
-              child: Text('Speichern'),
-            )),
-          ],
+
+              Container(
+                  margin: EdgeInsets.only(top: 15),
+                  width: 200,
+                  child: ElevatedButton(
+                style: raisedButtonStyle,
+                onPressed: () async {
+                if (_key.currentState.validate()) {
+                  _key.currentState.save();
+                  // print(provider.user.toJson());
+                  // return;
+                  var result = await provider.updateUser();
+                  if (!result) {
+                    _scafoldKey.currentState.showSnackBar(SnackBar(
+                      content: Text(Provider.of<UserProvider>(context, listen: false).message),
+                    )
+                    );
+                    print('error');
+                  }
+                } else
+                  print('is not validate');
+              },
+                child: Text('Speichern'),
+              )),
+            ],
+          ),
         ),
       ),
     );
