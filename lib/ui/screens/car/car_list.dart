@@ -1,5 +1,5 @@
 import 'package:chat_app/models/car_model.dart';
-import 'package:chat_app/ui/screens/start_conversation.dart';
+import 'package:chat_app/ui/screens/car/car_edit.dart';
 import 'package:chat_app/ui/style.dart';
 //import 'package:chat_app/providers/user_provider.dart';
 import 'package:flutter/material.dart';
@@ -34,44 +34,53 @@ class CarList extends StatelessWidget {
               ),
               child: Row(
                 children: <Widget>[
-                  Container(
-                      margin:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                      padding: EdgeInsets.all(5),
-                      child: Material(
-                          color: Colors.transparent,
-                          child: InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => StartConversation(),
-                                    settings: RouteSettings(
-                                      arguments: cars[index],
-                                    ),
-                                  ),
-                                );
-                              },
-                              child: IconButton(
-                                icon: Image.asset('assets/car_side.png'),
-                                iconSize: 25,
-                              )))),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        cars[index].manufacturerAndBrand,
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
+                  Expanded(
+                      flex: 2,
+                      child: Container(
+                        margin:
+                            EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                        padding: EdgeInsets.all(5),
+                        child: Material(
+                            color: Colors.transparent,
+                            child: InkWell(
+                                child: IconButton(
+                              icon: Image.asset('assets/car_side.png'),
+                              iconSize: 25,
+                            ))),
+                      )),
+                  Expanded(
+                      flex: 5,
+                      child: Container(
+                        alignment: Alignment.centerLeft,
+                        child: Column(
+                          children: <Widget>[
+                            Text(
+                              cars[index].manufacturerAndBrand,
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              cars[index].licenseNumber.toString(),
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                          ],
                         ),
-                      ),
-                      Text(
-                        cars[index].licenseNumber.toString(),
-                        style: TextStyle(color: Colors.grey),
-                      ),
-                    ],
-                  ),
+                      )),
+                  Expanded(
+                      flex: 2,
+                      child: Container(
+                          margin: EdgeInsets.only(right: 10),
+                          child: Material(
+                              color: Colors.transparent,
+                              child: InkWell(
+                                  child: IconButton(
+                                icon: new Icon(Icons.edit),
+                                onPressed: () => Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                        builder: (_) => CarEdit())),
+                              )))))
                 ],
               ),
             ),

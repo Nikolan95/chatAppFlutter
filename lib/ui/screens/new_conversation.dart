@@ -74,12 +74,12 @@ class _NewConversationState extends State<NewConversation> {
             onPressed: () => Navigator.of(context).pop(),
             icon: Icon(Icons.arrow_back_ios),
           ),
-          title: Text('Chat starten'),
+          title: Text('Neue Nachricht'),
           centerTitle: true,
         ),
         body: SingleChildScrollView(
           child: Column(
-              //mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //mainAxisAlignment: MainAxisAlignment.spaceBetween,
               //crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 Padding(
@@ -88,13 +88,6 @@ class _NewConversationState extends State<NewConversation> {
                     height: 2.0,
                     width: 500.0,
                     color: Style.primaryColor,
-                  ),
-                ),
-                Container(
-                  height: 50,
-                  child: Text(
-                    'Stratin conversation for',
-                    style: TextStyle(fontSize: 16),
                   ),
                 ),
                 Container(
@@ -117,25 +110,23 @@ class _NewConversationState extends State<NewConversation> {
                           print(_value);
                         });
                       },
-                      hint: Text("Please select your car")),
+                      hint: Text("Fahrzeug auswählen")),
                 ),
                 Padding(
-                  padding:
-                      EdgeInsets.only(top: 50, left: 30, right: 30, bottom: 20),
+                  padding: EdgeInsets.all(40),
                   child: TextField(
-                    maxLines: 10,
+                    maxLines: 20,
                     decoration: InputDecoration.collapsed(
-                        hintText: "Enter your message here"),
+                        hintText: "Hier Nachricht eingeben"),
                     controller: messageController,
                   ),
                 ),
                 Container(
-                    margin: EdgeInsets.only(top: 50),
                     width: 200,
                     child: ElevatedButton(
                       style: raisedButtonStyle,
                       onPressed: submitData,
-                      child: Text('Send'),
+                      child: Text('Nachricht senden'),
                     )),
               ]),
         ),
