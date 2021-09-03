@@ -47,18 +47,29 @@ class StartConversation extends StatelessWidget {
       );
 
     }
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: SingleChildScrollView(
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: Image.asset("assets/background.png").image,
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          leading: IconButton(
+            onPressed: () => Navigator.of(context).pop(),
+            icon: Icon(Icons.arrow_back_ios),
+          ),
+          title: Text('Chat starten'),
+          centerTitle: true,
+        ),
+        body: SingleChildScrollView(
         child: Column(
           //mainAxisAlignment: MainAxisAlignment.spaceAround,
           //crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Container(
-                margin: EdgeInsets.only(top: 35, bottom: 15),
-                child: Image.asset(
-                  'assets/logo-atev-white.png',
-                )),
             Padding(
               padding: EdgeInsets.only(bottom: 20),
               child: Container(
@@ -93,7 +104,7 @@ class StartConversation extends StatelessWidget {
           ]
         ),
     ),
-    );
+    ),);
   }
 }
   
