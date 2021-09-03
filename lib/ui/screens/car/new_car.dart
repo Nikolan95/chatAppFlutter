@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../style.dart';
+
 class NewCar extends StatefulWidget {
   
   final Function addCar;
@@ -57,7 +59,7 @@ class _NewCarState extends State<NewCar>{
   Widget build(BuildContext context) {
      final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
       onPrimary: Colors.white,
-      primary: Colors.yellow[700],
+      primary: Style.primaryColor,
       minimumSize: Size(88, 36),
       padding: EdgeInsets.symmetric(horizontal: 16),
       shape: const RoundedRectangleBorder(

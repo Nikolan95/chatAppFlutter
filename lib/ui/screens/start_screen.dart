@@ -35,7 +35,7 @@ class _StartScreenState extends State<StartScreen>{
   Widget build(BuildContext context) {
     final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
       onPrimary: Colors.white,
-      primary: Colors.yellow[700],
+      primary: Style.primaryColor,
       minimumSize: Size(88, 36),
       padding: EdgeInsets.symmetric(horizontal: 16),
       shape: const RoundedRectangleBorder(
@@ -64,7 +64,7 @@ class _StartScreenState extends State<StartScreen>{
               child: Container(
                 height: 2.0,
                 width: 500.0,
-                color: Colors.yellow[700],
+                color: Style.primaryColor,
               ),
             ),
             Container(

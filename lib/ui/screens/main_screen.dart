@@ -15,7 +15,6 @@ import 'package:provider/provider.dart';
 
 import 'car/car_screen.dart';
 
-
 class MainScreen extends StatefulWidget {
   static final routeName = 'main';
   @override
@@ -29,14 +28,14 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     super.initState();
-    _firebaseMessaging.getToken().then((token){
+    _firebaseMessaging.getToken().then((token) {
       print(token);
       Provider.of<UserProvider>(context, listen: false).setFcmToken(token);
     });
     notification();
   }
 
-  notification(){
+  notification() {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       RemoteNotification notification = message.notification;
       AndroidNotification android = message.notification?.android;
@@ -55,25 +54,25 @@ class _MainScreenState extends State<MainScreen> {
                 icon: '@mipmap/ic_launcher',
               ),
             ));
-            print(message.data['message']);
-            handleNotification(message.data['message'], false);
-            //handleNotification(notification.body, false);
+        print(message.data['message']);
+        handleNotification(message.data['message'], false);
+        //handleNotification(notification.body, false);
       }
     });
 
-    FirebaseMessaging.onBackgroundMessage((RemoteMessage message){
+    FirebaseMessaging.onBackgroundMessage((RemoteMessage message) {
       print('A new onMessageOpenedApp event was published!');
       RemoteNotification notification = message.notification;
       AndroidNotification android = message.notification?.android;
-            handleNotification(message.data['message'], false);
-            return null;
+      handleNotification(message.data['message'], false);
+      return null;
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       print('A new onMessageOpenedApp event was published!');
       RemoteNotification notification = message.notification;
       AndroidNotification android = message.notification?.android;
-            handleNotification(message.data['message'], false);
+      handleNotification(message.data['message'], false);
 
       if (notification != null && android != null) {
         showDialog(
@@ -92,16 +91,15 @@ class _MainScreenState extends State<MainScreen> {
       }
       //print(notification.body);
     });
-    
   }
 
-  handleNotification(data, bool push){
+  handleNotification(data, bool push) {
     var messageJson = json.decode(data);
     var message = MessageModel.fromJson(messageJson);
-    Provider.of<ConversationProvider>(context, listen: false).addMessageToConversation(message.conversationId, message);
+    Provider.of<ConversationProvider>(context, listen: false)
+        .addMessageToConversation(message.conversationId, message);
     print(messageJson);
   }
-
 
   final PageController _pageController = new PageController();
   @override
@@ -110,14 +108,7 @@ class _MainScreenState extends State<MainScreen> {
       body: PageView(
         physics: NeverScrollableScrollPhysics(),
         controller: _pageController,
-        children: <Widget>[
-          ConversationScreen(),
-          CarScreen(),
-          Container(
-            color: Colors.green,
-          ),
-          ProfileScreen()
-        ],
+        children: <Widget>[ConversationScreen(), CarScreen(), ProfileScreen()],
       ),
       bottomNavigationBar: BubbleBottomBar(
         opacity: .2,
@@ -135,49 +126,38 @@ class _MainScreenState extends State<MainScreen> {
         inkColor: Colors.black12, //optional, uses theme color if not specified
         items: <BubbleBottomBarItem>[
           BubbleBottomBarItem(
-              backgroundColor: Colors.yellow,
+              backgroundColor: Style.primaryColor,
               icon: Icon(
                 Icons.home,
                 color: Colors.white,
               ),
               activeIcon: Icon(
                 Icons.message,
-                color: Colors.yellow,
+                color: Style.primaryColor,
               ),
-              title: Text("Home")),
+              title: Text("Chats")),
           BubbleBottomBarItem(
-              backgroundColor: Colors.yellow,
+              backgroundColor: Style.primaryColor,
               icon: Icon(
                 Icons.car_repair,
                 color: Colors.white,
               ),
               activeIcon: Icon(
                 Icons.car_repair,
-                color: Colors.yellow,
+                color: Style.primaryColor,
               ),
-              title: Text("My Cars")),
+              title: Text("Fahrzeuge")),
           BubbleBottomBarItem(
-              backgroundColor: Colors.yellow,
-              icon: Icon(
-                Icons.people,
-                color: Colors.white,
-              ),
-              activeIcon: Icon(
-                Icons.people,
-                color: Colors.yellow,
-              ),
-              title: Text("Friends")),
-          BubbleBottomBarItem(
-              backgroundColor: Colors.yellow,
+              backgroundColor: Style.primaryColor,
               icon: Icon(
                 Icons.person,
                 color: Colors.white,
               ),
               activeIcon: Icon(
                 Icons.person,
-                color: Colors.yellow,
+                color: Style.primaryColor,
               ),
-              title: Text("Profile")),
+              title: Text("Profil")),
         ],
       ),
     );

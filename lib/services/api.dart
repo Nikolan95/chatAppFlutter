@@ -10,19 +10,23 @@ class Api {
     }
     Api._internal();
 
-    String token;
-    //Android
-    String devUrl = '10.0.2.2:8000';
-    //IOS
+    //IOS Simulator
     //String devUrl = 'localhost:8000';
-    String liveUrl = '195.4.160.243';
+
+    //Android Simulator
+    //String devUrl = '10.0.2.2:8000';
+
+    //Live
+    String devUrl = 'app.atev.de';
+
     String path = '/api';
+    String token;
 
     Future<http.Response> httpGet(String endPath,{Map<String, String> query}){
-        Uri url = Uri.http(devUrl, '$path/$endPath');
+        Uri url = Uri.https(devUrl, '$path/$endPath');
 
         if(query != null){
-            url = Uri.http(devUrl, '$path/$endPath', query);
+            url = Uri.https(devUrl, '$path/$endPath', query);
         }
         return http.get(url, headers: {
             'Authorization': 'Bearer $token',
@@ -31,7 +35,7 @@ class Api {
     }
 
     Future<http.Response> httpPost(String endPath,Object body){
-        Uri url = Uri.http(devUrl, '$path/$endPath');
+        Uri url = Uri.https(devUrl, '$path/$endPath');
 
         return http.post(url,body: body, headers: {
             'Authorization': 'Bearer $token',

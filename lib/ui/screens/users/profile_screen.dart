@@ -3,6 +3,7 @@ import 'package:chat_app/ui/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../style.dart';
 import 'edit_profile_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -11,7 +12,7 @@ class ProfileScreen extends StatelessWidget {
     var provider = Provider.of<UserProvider>(context);
     final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
       onPrimary: Colors.white,
-      primary: Colors.yellow[700],
+      primary: Style.primaryColor,
       minimumSize: Size(88, 36),
       padding: EdgeInsets.symmetric(horizontal: 16),
       shape: const RoundedRectangleBorder(
@@ -40,11 +41,11 @@ class ProfileScreen extends StatelessWidget {
                   'assets/logo-atev-white.png',
                 )),
             Padding(
-              padding: EdgeInsets.only(bottom: 20),
+              padding: EdgeInsets.only(bottom: 25),
               child: Container(
                 height: 2.0,
                 width: 500.0,
-                color: Colors.yellow[700],
+                color: Style.primaryColor,
               ),
             ),
             Container(
@@ -56,10 +57,11 @@ class ProfileScreen extends StatelessWidget {
             ),
             SizedBox(
               child: Card(
-                elevation: 5,
+                color: Colors.transparent,
+                margin: const EdgeInsets.only(bottom: 8, left: 10, right: 10),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)
-                    ),
+                  borderRadius: BorderRadius.circular(15),
+                ),
                 child: Row(
                   children: <Widget>[
                     Column(
@@ -68,17 +70,17 @@ class ProfileScreen extends StatelessWidget {
                         Container(
                           margin: EdgeInsets.only(left: 30, top: 5),
                           child: Text(
-                            'Vorname',
+                            'Name:',
                             style: TextStyle(
-                              fontSize: 16,
+                              fontSize: 13,
                             ),
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.only(left: 30, top: 5, bottom: 5),
+                          margin: EdgeInsets.only(left: 30, top: 5, bottom: 10),
                           child: Text(
                             provider.user.name,
-                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                            style: TextStyle(fontSize: 17, fontWeight: FontWeight.normal),
                           ),
                         ),
                       ],
@@ -89,10 +91,11 @@ class ProfileScreen extends StatelessWidget {
             ),
             SizedBox(
               child: Card(
-                elevation: 5,
+                margin: const EdgeInsets.only(bottom: 8, left: 10, right: 10),
+                color: Colors.transparent,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)
-                    ),
+                  borderRadius: BorderRadius.circular(15),
+                ),
                 child: Row(
                   children: <Widget>[
                     Column(
@@ -101,17 +104,17 @@ class ProfileScreen extends StatelessWidget {
                         Container(
                           margin: EdgeInsets.only(left: 30, top: 5),
                           child: Text(
-                            'Unternehmen',
+                            'Unternehmen:',
                             style: TextStyle(
-                              fontSize: 16,
+                              fontSize: 13,
                             ),
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.only(left: 30, top: 5, bottom: 5),
+                          margin: EdgeInsets.only(left: 30, top: 5, bottom: 10),
                           child: Text(
                             provider.user.company,
-                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                            style: TextStyle(fontSize: 17, fontWeight: FontWeight.normal),
                           ),
                         ),
                       ],
@@ -122,10 +125,11 @@ class ProfileScreen extends StatelessWidget {
             ),
             SizedBox(
               child: Card(
-                elevation: 5,
+                margin: const EdgeInsets.only(bottom: 8, left: 10, right: 10),
+                color: Colors.transparent,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)
-                    ),
+                  borderRadius: BorderRadius.circular(15),
+                ),
                 child: Row(
                   children: <Widget>[
                     Column(
@@ -134,17 +138,17 @@ class ProfileScreen extends StatelessWidget {
                         Container(
                           margin: EdgeInsets.only(left: 30, top: 5),
                           child: Text(
-                            'Straße & Nr',
+                            'Adresse:',
                             style: TextStyle(
-                              fontSize: 16,
+                              fontSize: 13,
                             ),
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.only(left: 30, top: 5, bottom: 5),
+                          margin: EdgeInsets.only(left: 30, top: 5, bottom: 10),
                           child: Text(
-                             provider.user.street,
-                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                            provider.user.street,
+                            style: TextStyle(fontSize: 17, fontWeight: FontWeight.normal),
                           ),
                         ),
                       ],
@@ -155,10 +159,11 @@ class ProfileScreen extends StatelessWidget {
             ),
             SizedBox(
               child: Card(
-                elevation: 5,
+                margin: const EdgeInsets.only(bottom: 8, left: 10, right: 10),
+                color: Colors.transparent,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)
-                    ),
+                  borderRadius: BorderRadius.circular(15),
+                ),
                 child: Row(
                   children: <Widget>[
                     Column(
@@ -167,17 +172,17 @@ class ProfileScreen extends StatelessWidget {
                         Container(
                           margin: EdgeInsets.only(left: 30, top: 5),
                           child: Text(
-                            'PLZ, Ort',
+                            'PLZ und Stadt:',
                             style: TextStyle(
-                              fontSize: 16,
+                              fontSize: 13,
                             ),
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.only(left: 30, top: 5, bottom: 5),
+                          margin: EdgeInsets.only(left: 30, top: 5, bottom: 10),
                           child: Text(
-                             provider.user.city,
-                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                            provider.user.city,
+                            style: TextStyle(fontSize: 17, fontWeight: FontWeight.normal),
                           ),
                         ),
                       ],
@@ -188,10 +193,11 @@ class ProfileScreen extends StatelessWidget {
             ),
             SizedBox(
               child: Card(
-                elevation: 5,
+                margin: const EdgeInsets.only(bottom: 8, left: 10, right: 10),
+                color: Colors.transparent,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)
-                    ),
+                  borderRadius: BorderRadius.circular(15),
+                ),
                 child: Row(
                   children: <Widget>[
                     Column(
@@ -200,17 +206,51 @@ class ProfileScreen extends StatelessWidget {
                         Container(
                           margin: EdgeInsets.only(left: 30, top: 5),
                           child: Text(
-                            'Telefon',
+                            'Telefonnummer:',
                             style: TextStyle(
-                              fontSize: 16,
+                              fontSize: 13,
                             ),
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.only(left: 30, top: 5, bottom: 5),
+                          margin: EdgeInsets.only(left: 30, top: 5, bottom: 10),
                           child: Text(
                             provider.user.phoneNumber,
-                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                            style: TextStyle(fontSize: 17, fontWeight: FontWeight.normal),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(
+              child: Card(
+                margin: const EdgeInsets.only(bottom: 8, left: 10, right: 10),
+                color: Colors.transparent,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Row(
+                  children: <Widget>[
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Container(
+                          margin: EdgeInsets.only(left: 30, top: 5),
+                          child: Text(
+                            'E-Mail:',
+                            style: TextStyle(
+                              fontSize: 13,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(left: 30, top: 5, bottom: 10),
+                          child: Text(
+                            provider.user.email,
+                            style: TextStyle(fontSize: 17, fontWeight: FontWeight.normal),
                           ),
                         ),
                       ],
@@ -226,7 +266,7 @@ class ProfileScreen extends StatelessWidget {
               style: raisedButtonStyle,
               onPressed: () => Navigator.of(context).push(
                     MaterialPageRoute(builder: (_) => EditProfileScreen())),
-              child: Text('Speichern'),
+              child: Text('Bearbeiten'),
             )),
           ],
         ),

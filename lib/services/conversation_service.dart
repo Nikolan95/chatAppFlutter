@@ -6,27 +6,29 @@ import 'package:http/http.dart' as http;
  import 'dart:convert';
 
 
-class ConversationService  extends BaseApi{
+class ConversationService extends BaseApi {
   Future<http.Response> getConversations() async {
     return await api.httpGet('conversations');
   }
+
   Future<http.Response> getLastConversation() async {
     return await api.httpGet('lastconversation');
   }
-  Future<http.Response> newConversation(String userId, String message, String carId) async {
-    return await api.httpPost('conversations', {
-      'user_id':userId,
-      'message':message,
-      'car_id':carId
-    });
+
+  Future<http.Response> newConversation(
+      String userId, String message, String carId) async {
+    return await api.httpPost('conversations',
+        {'user_id': userId, 'message': message, 'car_id': carId});
   }
+
   Future<http.Response> storeMessage(MessageModel message) async {
     return await api.httpPost('messages', {
-      'body':message.body,
+      'body': message.body,
+      'image': message.image,
       'conversation_id': message.conversationId.toString()
-      }
-    );
+    });
   }
+<<<<<<< HEAD
   Future<http.Response> updateMessage(int id, String offer) async {
     return await api.httpPost('messages/update', {
       'id':json.encode(id),
@@ -36,3 +38,6 @@ class ConversationService  extends BaseApi{
     );
   }
 }
+=======
+}
+>>>>>>> 402c65ec86ce22fbe6c68c4752db87e45b5827c0

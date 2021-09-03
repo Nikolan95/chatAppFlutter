@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:chat_app/providers/conversation_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../style.dart';
 import 'main_screen.dart';
 
 class StartConversation extends StatelessWidget {
@@ -16,7 +17,7 @@ class StartConversation extends StatelessWidget {
   Widget build(BuildContext context) {
     final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
       onPrimary: Colors.white,
-      primary: Colors.yellow[700],
+      primary: Style.primaryColor,
       minimumSize: Size(88, 36),
       padding: EdgeInsets.symmetric(horizontal: 16),
       shape: const RoundedRectangleBorder(
@@ -46,24 +47,35 @@ class StartConversation extends StatelessWidget {
       );
 
     }
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: SingleChildScrollView(
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: Image.asset("assets/background.png").image,
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          leading: IconButton(
+            onPressed: () => Navigator.of(context).pop(),
+            icon: Icon(Icons.arrow_back_ios),
+          ),
+          title: Text('Chat starten'),
+          centerTitle: true,
+        ),
+        body: SingleChildScrollView(
         child: Column(
           //mainAxisAlignment: MainAxisAlignment.spaceAround,
           //crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Container(
-                margin: EdgeInsets.only(top: 35, bottom: 15),
-                child: Image.asset(
-                  'assets/logo-atev-white.png',
-                )),
             Padding(
               padding: EdgeInsets.only(bottom: 20),
               child: Container(
                 height: 2.0,
                 width: 500.0,
-                color: Colors.yellow[700],
+                color: Style.primaryColor,
               ),
             ),
             Container(
@@ -92,7 +104,7 @@ class StartConversation extends StatelessWidget {
           ]
         ),
     ),
-    );
+    ),);
   }
 }
   

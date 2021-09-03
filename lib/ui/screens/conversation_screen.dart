@@ -2,6 +2,7 @@
 // import 'package:chat_app/ui/screens/welcome_screen.dart';
 // import 'package:chat_app/ui/style.dart';
 import 'package:chat_app/providers/user_provider.dart';
+import 'package:chat_app/ui/style.dart';
 import 'package:chat_app/ui/widgets/cards/conversation_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -55,7 +56,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
                     child:Container(
                     height:2.0,
                     width:500.0,
-                    color:Colors.yellow[700],),
+                    color:Style.primaryColor),
                 ),
                 Container(
                   child: provider.busy
@@ -90,7 +91,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
         },
         tooltip: 'New Conversation',
         child: const Icon(Icons.add),
-        backgroundColor: Colors.yellow[700],
+        backgroundColor: Style.primaryColor,
       ), 
     ),
       );
