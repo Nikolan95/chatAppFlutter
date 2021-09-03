@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class Style {
   /// Colors
-  static final Color primaryColor = Color(0xFFE9A943); //#4382d8
-  static final Color secondaryColor = Color(0xFFE9A943); //#2facd6
-  static final Color darkColor = Color(0xFF151515); // #151515
+  static final Color primaryColor = Color(0xFFE9A943);
+  static final Color secondaryColor = Color(0xFFE9A943);
+  static final Color darkColor = Color(0xFF151515);
   static final List<Color> gradientColors = [primaryColor, secondaryColor];
 
   /// Text Style
