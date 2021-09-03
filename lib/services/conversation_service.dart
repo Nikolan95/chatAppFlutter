@@ -28,7 +28,6 @@ class ConversationService extends BaseApi {
       'conversation_id': message.conversationId.toString()
     });
   }
-<<<<<<< HEAD
   Future<http.Response> updateMessage(int id, String offer) async {
     return await api.httpPost('messages/update', {
       'id':json.encode(id),
@@ -38,6 +37,5 @@ class ConversationService extends BaseApi {
     );
   }
 }
-=======
-}
->>>>>>> 402c65ec86ce22fbe6c68c4752db87e45b5827c0
+
+
