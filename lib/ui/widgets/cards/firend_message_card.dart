@@ -62,7 +62,20 @@ class FriendMessageCard extends StatelessWidget {
                 style: TextStyle(color: Colors.white),
               ),
             )
-            : message.offerItems.length > 0 ? Container(
+            : message.offerItems.length > 0 && message.acceptOffer == null ? Container(
+                  child: IconButton(
+                  icon: new Icon(Icons.file_copy),
+                  onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                  builder: (context) => OfferItemScreen(),
+                  settings: RouteSettings(
+                  arguments: message,
+                  ),
+                  ),
+                  )
+            ))
+            : message.acceptOffer == 'accept' ? Container(
                   child: IconButton(
                   icon: new Icon(Icons.file_copy),
                   onPressed: () => Navigator.push(

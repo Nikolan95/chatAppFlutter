@@ -1,4 +1,5 @@
-import 'dart:ui';
+import 'package:chat_app/models/terms_and_conditions_model.dart';
+
 import 'offeritem_model.dart';
 
 class MessageModel   {
@@ -7,21 +8,25 @@ class MessageModel   {
   int read;
   int userId;
   int conversationId;
+  String acceptOffer;
   String createdAt;
   String updatedAt;
   String image;
   List<OfferItemModel> offerItems;
+  List<TermsAndConditionsModel> termsAndConditions;
 
   MessageModel  ({
     this.id,
     this.body,
     this.read,
     this.userId,
+    this.acceptOffer,
     this.conversationId,
     this.createdAt,
     this.updatedAt,
     this.image,
-    this.offerItems
+    this.offerItems,
+    this.termsAndConditions
   });
 
   MessageModel  .fromJson(Map<String, dynamic> json) {
@@ -29,6 +34,7 @@ class MessageModel   {
     body = json['body'];
     read = json['read'] == 'false' ? 0 : 1;
     userId = json['user_id'];
+    acceptOffer = json['accept_offer'];
     conversationId = json['conversation_id'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
@@ -40,6 +46,13 @@ class MessageModel   {
         offerItems.add(new OfferItemModel.fromJson(v));
       });
     }
+    if (json['termsandconditions'] != null) {
+      termsAndConditions = new List<TermsAndConditionsModel>();
+      //List<MessageModel> messages = [];
+      json['termsandconditions'].forEach((v) {
+        termsAndConditions.add(new TermsAndConditionsModel.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -48,6 +61,7 @@ class MessageModel   {
     data['body'] = this.body;
     data['read'] = this.read;
     data['user_id'] = this.userId;
+    data['accept_offer'] = this.acceptOffer;
     data['conversation_id'] = this.conversationId;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;

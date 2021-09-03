@@ -1,12 +1,17 @@
 import 'package:chat_app/models/message_model.dart';
 import 'package:chat_app/models/offeritem_model.dart';
+import 'package:chat_app/providers/conversation_provider.dart';
 import 'package:chat_app/ui/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
+import '../main_screen.dart';
 
 class OfferItemScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    String bullet = "\u2022 ";
     final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
       onPrimary: Colors.white,
       primary: Colors.yellow[700],
@@ -18,37 +23,67 @@ class OfferItemScreen extends StatelessWidget {
     );
   final MessageModel message = ModalRoute.of(context).settings.arguments;
   final List <OfferItemModel> offerItems = message.offerItems;
+  var sum = 0;
+  offerItems.forEach((element) { sum += element.total;});
    List<DataColumn> getColumns(List<String> columns) => columns
     .map((String column) => DataColumn(
-      label: Text(column, style: TextStyle(fontWeight: FontWeight.bold),),
+      label: Text(column, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
     ))  
     .toList();
     List<DataCell>getCells(List<dynamic> cells) => 
     cells.map((data) => DataCell(Text('$data'))).toList();
   List<DataRow> getRows(List<OfferItemModel> offerItems) => offerItems.map((OfferItemModel offerItem) {
     final cells = [
-      offerItem.articleNumber,
       offerItem.name,
       offerItem.amount,
-      offerItem.price,
-      offerItem.total
+      NumberFormat.simpleCurrency(locale: 'eu').format(offerItem.price),
+      NumberFormat.simpleCurrency(locale: 'eu').format(offerItem.total)
     ];
     return DataRow(cells: getCells(cells));
   }).toList();
   Widget buildDataTable(){
-    final columns = ['Artikel', 'name', 'qty', 'price', 'total'];
+    final columns = ['Name', 'Qty', 'Price', 'Total'];
 
-    return SingleChildScrollView(
-         scrollDirection: Axis.vertical,
-         child: SingleChildScrollView(
-           scrollDirection: Axis.horizontal,
-           child: DataTable(
-             columns: 
+    return Container(
+      height: 225,
+      padding: EdgeInsets.only(right: 20, left: 20),
+      child: SingleChildScrollView(
+           scrollDirection: Axis.vertical,
              
-             getColumns(columns),
-              rows: getRows(message.offerItems)
-           ),
-         ),
+             child: SingleChildScrollView(
+               scrollDirection: Axis.horizontal,
+               child: DataTable(
+                 columns: 
+                 
+                 getColumns(columns),
+                  rows: getRows(message.offerItems)
+               ),
+             ),
+      ),
+    );
+  }
+  void accept() async {
+    final id = message.id;
+    final offer = 'accept';
+
+    await Provider.of<ConversationProvider>(context, listen: false)
+      .updateMessage(id, offer);
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => MainScreen()),
+    );
+  }
+  void decline() async {
+    final id = message.id;
+    final offer = 'decline';
+
+    await Provider.of<ConversationProvider>(context, listen: false)
+      .updateMessage(id, offer);
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => MainScreen()),
     );
   }
     SizeConfig().init(context);
@@ -56,7 +91,7 @@ class OfferItemScreen extends StatelessWidget {
       backgroundColor: Colors.black,
       body: SingleChildScrollView(
         child: Column(
-          //mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //mainAxisAlignment: MainAxisAlignment.center,
           //crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Container(
@@ -74,8 +109,46 @@ class OfferItemScreen extends StatelessWidget {
             ),
             buildDataTable(),
             SizedBox(),
+            Container(
+              alignment: Alignment.topLeft,
+              padding: EdgeInsets.only(left: 20),
+              child:Text(
+                'Terms and Conditions:'
+              ),
+            ),
+            Container(
+              height: 200,
+              alignment: Alignment.topLeft,
+              padding: EdgeInsets.only(left: 30),
+              child: 
+                  // Text(
+                  //    //message.termsAndConditions.first.body.toString()
+                  //   'Terms and Conditions:'
+                  // ),
+                  ListView.builder(
+                    itemBuilder: (term, index){
+                      return SizedBox(
+                        child: Text(
+                          bullet + message.termsAndConditions[index].body.toString()
+                        ),
+                      );
+                    },
+                    itemCount: message.termsAndConditions.length,
+                  ),
+               // ],
+             // ),
+            ),
+            Container(
+              alignment: Alignment.topRight,
+              padding: EdgeInsets.only(top: 10, right: 30),
+              child: Text(
+               'Total ' + NumberFormat.simpleCurrency(locale: 'eu').format(sum),
+              ),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
+              //crossAxisAlignment: CrossAxisAlignment.center,
+
               children: <Widget>[
                 TextButton.icon(
                  icon: new Icon(Icons.check),
@@ -84,9 +157,7 @@ class OfferItemScreen extends StatelessWidget {
                    padding: EdgeInsets.only(top:30, right:20),
                  ),
                  label: Text('Ja', style: TextStyle(fontSize: 30),),
-                onPressed: () {
-                  print('da');
-                },
+                onPressed: accept,
                 ),
               TextButton.icon(
                  icon: new Icon(Icons.close),
@@ -95,9 +166,7 @@ class OfferItemScreen extends StatelessWidget {
                    padding: EdgeInsets.only(top:30),
                  ),
                  label: Text('Nein', style: TextStyle(fontSize: 30),),
-                onPressed: () {
-                  print('ne');
-                },
+                onPressed: decline,
                 ),
               ],
             )

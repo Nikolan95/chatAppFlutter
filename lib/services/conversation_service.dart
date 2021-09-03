@@ -3,6 +3,8 @@
 import 'package:chat_app/models/message_model.dart';
 import 'package:chat_app/services/base_api.dart';
 import 'package:http/http.dart' as http;
+ import 'dart:convert';
+
 
 class ConversationService  extends BaseApi{
   Future<http.Response> getConversations() async {
@@ -22,6 +24,14 @@ class ConversationService  extends BaseApi{
     return await api.httpPost('messages', {
       'body':message.body,
       'conversation_id': message.conversationId.toString()
+      }
+    );
+  }
+  Future<http.Response> updateMessage(int id, String offer) async {
+    return await api.httpPost('messages/update', {
+      'id':json.encode(id),
+      'accept_offer':offer,
+      '_method':'PUT'
       }
     );
   }

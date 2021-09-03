@@ -41,6 +41,22 @@ class ConversationProvider extends BaseProvider{
       setBusy(false);
   }
 
+  Future<void> updateMessage(int id, String offer) async {
+    setBusy(true);
+    var response = await _conversationService.updateMessage(id, offer);
+    print(response.body);
+    if(response.statusCode == 200){
+      var response = await _conversationService.getLastConversation();
+        var data = jsonDecode(response.body);
+        
+        print(response.body);
+        notifyListeners();
+        setBusy(false);
+      return _conversations;
+      }
+     
+  }
+
   addMessageToConversation(int conversationId, MessageModel message){
     var conversation = _conversations.firstWhere((conversation) => conversation.id == conversationId);
     conversation.messages.add(message);
