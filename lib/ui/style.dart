@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 
 class Style {
-  /// Colors
+  /// Atev Colors
   static final Color primaryColor = Color(0xFFE9A943);
   static final Color secondaryColor = Color(0xFFE9A943);
+
+  ///Dröschler Colors
+  //static final Color primaryColor = Color(0xFF4E72AA);
+  //static final Color secondaryColor = Color(0xFF4E72AA);
   static final Color darkColor = Color(0xFF151515);
   static final List<Color> gradientColors = [primaryColor, secondaryColor];
 

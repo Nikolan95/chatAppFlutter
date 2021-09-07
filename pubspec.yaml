@@ -63,6 +63,7 @@ flutter:
     - assets/car.png
     - assets/background.png
     - assets/car_side.png
+    - assets/logo-droeschler.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
