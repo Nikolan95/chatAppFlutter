@@ -178,6 +178,7 @@ class EditProfileScreen extends StatelessWidget {
                         child: ElevatedButton(
                           style: raisedButtonStyle,
                           onPressed: () async {
+                            print(provider.user.name);
                             if (_key.currentState.validate()) {
                               _key.currentState.save();
                               // print(provider.user.toJson());

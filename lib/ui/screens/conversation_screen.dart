@@ -69,6 +69,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
                           itemBuilder: (context, index) => ConversationCard(
                             conversation: provider.conversations[index],
                             onTap: () {
+                                provider.messageSeen(provider.conversations[index].id);
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (_) => ChatScreen(
                                         conversation: provider.conversations[index],

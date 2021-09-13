@@ -79,7 +79,11 @@ class CarList extends StatelessWidget {
                                 icon: new Icon(Icons.edit),
                                 onPressed: () => Navigator.of(context).push(
                                     MaterialPageRoute(
-                                        builder: (_) => CarEdit())),
+                                        builder: (_) => CarEdit(),
+                                        settings: RouteSettings(
+                                          arguments: cars[index]
+                                        ),
+                                        )),
                               )))))
                 ],
               ),

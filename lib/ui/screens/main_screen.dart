@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
-import 'package:chat_app/main.dart';
 import 'package:chat_app/models/message_model.dart';
 import 'package:chat_app/providers/conversation_provider.dart';
 import 'package:chat_app/providers/user_provider.dart';
@@ -10,7 +9,6 @@ import 'package:chat_app/ui/screens/users/profile_screen.dart';
 import 'package:chat_app/ui/style.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
 
 import 'car/car_screen.dart';
@@ -40,21 +38,21 @@ class _MainScreenState extends State<MainScreen> {
       RemoteNotification notification = message.notification;
       AndroidNotification android = message.notification?.android;
       if (notification != null && android != null) {
-        flutterLocalNotificationsPlugin.show(
-            notification.hashCode,
-            notification.title,
-            notification.body,
-            NotificationDetails(
-              android: AndroidNotificationDetails(
-                channel.id,
-                channel.name,
-                channel.description,
-                color: Colors.blue,
-                playSound: true,
-                icon: '@mipmap/ic_launcher',
-              ),
-            ));
-        print(message.data['message']);
+        // flutterLocalNotificationsPlugin.show(
+        //     notification.hashCode,
+        //     notification.title,
+        //     notification.body,
+        //     NotificationDetails(
+        //       android: AndroidNotificationDetails(
+        //         channel.id,
+        //         channel.name,
+        //         channel.description,
+        //         color: Colors.blue,
+        //         playSound: true,
+        //         icon: '@mipmap/ic_launcher',
+        //       ),
+        //     ));
+        //print(message.data['message']);
         handleNotification(message.data['message'], false);
         //handleNotification(notification.body, false);
       }
@@ -89,16 +87,20 @@ class _MainScreenState extends State<MainScreen> {
               );
             });
       }
-      //print(notification.body);
+      print(notification.body);
     });
   }
 
   handleNotification(data, bool push) {
+    //print(data);
     var messageJson = json.decode(data);
+    //print(messageJson['image'] + 'to je to');
     var message = MessageModel.fromJson(messageJson);
+    print(message.toJson());
+    //print(message.conversationId);
     Provider.of<ConversationProvider>(context, listen: false)
         .addMessageToConversation(message.conversationId, message);
-    print(messageJson);
+    //print(messageJson);
   }
 
   final PageController _pageController = new PageController();

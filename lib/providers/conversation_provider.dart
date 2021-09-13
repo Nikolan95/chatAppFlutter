@@ -27,6 +27,29 @@ class ConversationProvider extends BaseProvider{
     return _conversations;
   }
 
+  updateSeenedMessages(conversationId){
+      for(var line in _conversations){
+        if(line.id == conversationId){
+          for(var messageLine in line.messages){
+            messageLine.read = 1;
+            notifyListeners();
+          }
+        }
+    }
+  }
+
+  Future<void> messageSeen(conversationId) async {
+    setBusy(true);
+    var response = await _conversationService.messageSeen(conversationId);
+    //print(response.body);
+    if(response.statusCode == 200){
+      updateSeenedMessages(conversationId);
+      //print('fggfhf');
+      setBusy(false);
+    }
+      setBusy(false);
+  }
+
   Future<void> storeMessage(MessageModel message) async {
     setBusy(true);
     var response = await _conversationService.storeMessage(message);
@@ -58,8 +81,10 @@ class ConversationProvider extends BaseProvider{
   }
 
   addMessageToConversation(int conversationId, MessageModel message){
+    //print(conversationId);
     var conversation = _conversations.firstWhere((conversation) => conversation.id == conversationId);
     conversation.messages.add(message);
+    print(conversation.id);
     toTheTop(conversation);
     notifyListeners();
   }
@@ -93,12 +118,6 @@ class ConversationProvider extends BaseProvider{
      }
       setBusy(false);
   }
-  // addConversation(int conversationId, ConversationModel conversation,  MessageModel message){
-  //   var conversation = _conversations.firstWhere((conversation) => conversation.id == conversationId);
-  //   conversation.messages.add(message);
-  //   toTheTop(conversation);
-  //   notifyListeners();
-  // }
 
 }
 

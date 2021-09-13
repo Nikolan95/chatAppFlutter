@@ -1,6 +1,5 @@
 import 'package:chat_app/models/car_model.dart';
 import 'package:chat_app/providers/user_provider.dart';
-import 'package:chat_app/ui/screens/car/car_screen.dart';
 import 'package:chat_app/ui/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

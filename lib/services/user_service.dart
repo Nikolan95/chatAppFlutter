@@ -36,4 +36,19 @@ class UserService extends BaseApi {
       'user_id': car.userId.toString()
     });
   }
+  Future<http.Response> updateCar(CarModel car) async {
+    return await api.httpPost('cars/update', {
+      'id': car.id.toString(),
+      'first_registration': car.firstRegistration,
+      'vehicle_identification_number': car.vehicleIdentificationNumber,
+      'manufacturer_and_brand': car.manufacturerAndBrand,
+      'license_number': car.licenseNumber,
+      'holder_name': car.holderName,
+      'holder_city': car.holderCity,
+      'holder_postcode': car.holderPostcode,
+      'holder_street': car.holderStreet,
+      'owner_name': car.ownerName,
+      'user_id': car.userId.toString()
+    });
+  }
 }

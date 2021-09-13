@@ -18,11 +18,14 @@ class ConversationCard extends StatelessWidget {
     var provider = Provider.of<UserProvider>(context);
     var unread = [];
     for(var message in conversation.messages){
-        // if((message.userId != provider.user.id)){
-        //   print(message.toJson());
-        // }
-        //print(message.toJson());
+        if((message.userId != provider.user.id && message.read == 0)){
+          unread.add(message);
+          //print(message.toJson());
+        }
+        //print(message.read);
     }
+    int newMessages = unread.length;
+    //print(newMessages);
     return ListTile(
       onTap: onTap,
       leading: ClipOval(
@@ -33,6 +36,17 @@ class ConversationCard extends StatelessWidget {
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
+          conversation.messages.last.read == 0 && conversation.messages.last.userId != provider.user.id
+          ?
+          Text(
+            conversation.user.name,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          )
+          :
           Text(
             conversation.user.name,
             style: TextStyle(
@@ -49,9 +63,46 @@ class ConversationCard extends StatelessWidget {
           ),
         ],
       ),
-      subtitle: Text(conversation.messages.last.body != null
-                ? conversation.messages.last.body
-                : 'document'),
+      subtitle: Row(
+         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children:<Widget>[ 
+          conversation.messages.last.read == 0 && conversation.messages.last.userId != provider.user.id
+          ?
+          Text(conversation.messages.last.body != null
+            ? conversation.messages.last.body
+            : 'document',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+            ),)
+          :
+          Text(conversation.messages.last.body != null
+            ? conversation.messages.last.body
+            : 'document'),
+          newMessages != 0
+          ? Container(
+            //margin: const EdgeInsets.all(30.0),
+              padding: const EdgeInsets.all(5.0),
+              decoration: BoxDecoration(
+              border: Border.all(
+                
+                color: Colors.yellow[700],
+              ),
+              borderRadius: BorderRadius.all(Radius.circular(30))
+            ),
+            child: Text(
+              '${newMessages}',
+              style: TextStyle(
+              color: Colors.yellow[700],
+              fontWeight: FontWeight.bold,
+              fontSize: 14,
+              ),
+            ),
+          )
+          : Text(''),
+        ]
+      ),
     );
   }
 }

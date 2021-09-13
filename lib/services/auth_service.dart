@@ -14,13 +14,13 @@ class AuthService extends BaseApi{
   Future<http.Response> register(UserModel user) async {
     return await api.httpPost('register',
       {
-        'email': user.email, 
-        'password': user.password, 
         'name': user.name,
         'company': user.company, 
         'street': user.street, 
         'city': user.city, 
-        'telefon': user.phoneNumber 
+        'phoneNumber': user.phoneNumber,
+        'email': user.email, 
+        'password': user.password
       });
   }
   Future<http.Response> logout() async {

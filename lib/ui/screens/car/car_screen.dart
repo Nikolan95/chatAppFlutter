@@ -1,11 +1,9 @@
 import 'package:chat_app/models/car_model.dart';
 import 'package:chat_app/providers/user_provider.dart';
-import 'package:chat_app/ui/screens/car/new_car.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../style.dart';
 import 'car_list.dart';
-import 'car_edit.dart';
 import 'car_add.dart';
 
 class CarScreen extends StatefulWidget  {

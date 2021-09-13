@@ -21,10 +21,16 @@ class ConversationService extends BaseApi {
         {'user_id': userId, 'message': message, 'car_id': carId});
   }
 
+  Future<http.Response> messageSeen(conversationId) async {
+    return await api.httpPost('conversations/read', {
+      'conversation_id': conversationId.toString()
+    });
+  }
+
   Future<http.Response> storeMessage(MessageModel message) async {
     return await api.httpPost('messages', {
       'body': message.body,
-      'image': message.image,
+      //'image': message.image,
       'conversation_id': message.conversationId.toString()
     });
   }

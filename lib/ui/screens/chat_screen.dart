@@ -11,6 +11,8 @@ import 'package:chat_app/ui/widgets/cards/my_message_card.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 
 class ChatScreen extends StatefulWidget {
   final ConversationModel conversation;
@@ -46,6 +48,24 @@ class _ChatScreenState extends State<ChatScreen> {
       }
     });
   }
+  _makingPhoneCall() async {
+  const url = 'tel:52354353';
+  //const url = 'https://www.google.com/maps';
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
+
+_openMaps() async {
+  const url = 'https://www.google.com/maps/@48.301693,14.2987955,14.69z';
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
 
   @override
   void initState() {
@@ -75,6 +95,26 @@ class _ChatScreenState extends State<ChatScreen> {
           ),
           title: Text('${conversation.user.name}'),
           centerTitle: true,
+          actions: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(right: 20.0),
+              child: GestureDetector(
+                onTap: _openMaps,
+                child: Icon(
+                    Icons.map
+                ),
+              )
+            ),
+            Padding(
+              padding: EdgeInsets.only(right: 20.0),
+              child: GestureDetector(
+                onTap: _makingPhoneCall,
+                child: Icon(
+                    Icons.phone
+                ),
+              )
+            ),
+          ],
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

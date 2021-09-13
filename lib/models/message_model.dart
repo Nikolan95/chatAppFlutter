@@ -32,7 +32,7 @@ class MessageModel   {
   MessageModel  .fromJson(Map<String, dynamic> json) {
     id = json['id'];
     body = json['body'];
-    read = json['read'] == 'false' ? 0 : 1;
+    read = json['read'];
     userId = json['user_id'];
     acceptOffer = json['accept_offer'];
     conversationId = json['conversation_id'];
