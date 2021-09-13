@@ -1,9 +1,11 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:chat_app/models/message_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_bubble/bubble_type.dart';
 import 'package:flutter_chat_bubble/chat_bubble.dart';
 import 'package:flutter_chat_bubble/clippers/chat_bubble_clipper_5.dart';
-
 
 class MyMessageCard extends StatelessWidget {
   final MessageModel message;
@@ -11,6 +13,14 @@ class MyMessageCard extends StatelessWidget {
     Key key,
     this.message,
   }) : super(key: key);
+
+  Uint8List base64decode(String image) {
+    //Codec<String, String> stringToBase64 = utf8.fuse(base64);
+    //Uint8List _image =  base64Decode(image);
+    //var blob = yourJSONMapHere[image];
+    var _image = base64.decode(image);
+    return _image;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,12 +37,30 @@ class MyMessageCard extends StatelessWidget {
           constraints: BoxConstraints(
             maxWidth: MediaQuery.of(context).size.width * 0.7,
           ),
-          child: Text(
-            '${message.body}',
-            style: TextStyle(color: Colors.black),
-          ),
+          child: message.body != null &&
+                  (message.image == null || message.image.isEmpty)
+              ? Container(
+                  child: Text(
+                    '${message.body}',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                )
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                        padding: EdgeInsets.only(bottom: 12),
+                        child: Image.memory(base64decode(message.image),
+                            scale: 5)),
+                    if (message.body != "just_img_no_text")
+                      Text(
+                        '${message.body}',
+                        style: TextStyle(color: Colors.white),
+                      )
+                  ],
+                ),
         ),
-      )
+      ),
     );
   }
 }
