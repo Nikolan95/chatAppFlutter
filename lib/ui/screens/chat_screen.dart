@@ -60,6 +60,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
 _openMaps() async {
   const url = 'https://www.google.com/maps/@48.301693,14.2987955,14.69z';
+  //const url = 'http://192.168.0.21/atev-laravel-backend/public';
   if (await canLaunch(url)) {
     await launch(url);
   } else {

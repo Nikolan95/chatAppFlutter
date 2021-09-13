@@ -1,7 +1,6 @@
 import 'dart:convert';
-import 'dart:ffi';
 import 'dart:typed_data';
-
+import 'package:url_launcher/url_launcher.dart';
 import 'package:chat_app/models/message_model.dart';
 import 'package:chat_app/ui/screens/offers/offer_view.dart';
 import 'package:flutter/material.dart';
@@ -87,6 +86,20 @@ class FriendMessageCard extends StatelessWidget {
                   ),
                   ),
                   )
+            ))
+            : message.file != null ? Container(
+                  child: IconButton(
+                  icon: new Icon(Icons.picture_as_pdf),
+                  onPressed: 
+                      () async {
+                      var url = 'http://192.168.0.21./atev-laravel-backend/public'+ message.file.filePath;
+                      if (await canLaunch(url)) {
+                        await launch(url);
+                      } else {
+                        throw 'Could not launch $url';
+                      }
+                    
+                  },
             ))
                 : Container(
                 child: Image.memory(base64decode(message.image), scale: 5)

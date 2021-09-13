@@ -1,5 +1,6 @@
 import 'package:chat_app/models/terms_and_conditions_model.dart';
 
+import 'file_model.dart';
 import 'offeritem_model.dart';
 
 class MessageModel   {
@@ -12,6 +13,7 @@ class MessageModel   {
   String createdAt;
   String updatedAt;
   String image;
+  FileModel file;
   List<OfferItemModel> offerItems;
   List<TermsAndConditionsModel> termsAndConditions;
 
@@ -25,6 +27,7 @@ class MessageModel   {
     this.createdAt,
     this.updatedAt,
     this.image,
+    this.file,
     this.offerItems,
     this.termsAndConditions
   });
@@ -39,6 +42,7 @@ class MessageModel   {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     image = json['image'];
+    file = json['file'] != null ? new FileModel.fromJson(json['file']) : null;
     if (json['offeritems'] != null) {
       offerItems = new List<OfferItemModel>();
       //List<MessageModel> messages = [];
