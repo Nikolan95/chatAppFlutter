@@ -8,7 +8,6 @@ import '../../size_config.dart';
 import '../../style.dart';
 
 class CarAdd extends StatefulWidget {
-
   @override
   CarAddState createState() {
     return CarAddState();
@@ -16,7 +15,6 @@ class CarAdd extends StatefulWidget {
 }
 
 class CarAddState extends State<CarAdd> {
-
   CarModel _carModel = new CarModel();
   final _key = GlobalKey<FormState>();
   final _scafoldKey = GlobalKey<ScaffoldState>();
@@ -32,7 +30,6 @@ class CarAddState extends State<CarAdd> {
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(20)),
         ));
-
 
     SizeConfig().init(context);
     return Container(
@@ -54,189 +51,193 @@ class CarAddState extends State<CarAdd> {
               title: Text('Neues Fahrzeug'),
               centerTitle: true,
             ),
-
-            body: SingleChildScrollView(child: Column(
-              //mainAxisAlignment: MainAxisAlignment.spaceAround,
-              //crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(bottom: 10),
-                  child: Container(
-                    height: 2.0,
-                    width: 500.0,
-                    color: Style.primaryColor,
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(bottom: 15),
-                  padding: EdgeInsets.symmetric(horizontal: SizeConfig.blockSizeHorizontal * 4),
-                  child:  Form(
-                    key: _key,
-                    child: Column(
-                      children: <Widget>[
-                        SizedBox(
-                          height: SizeConfig.blockSizeHorizontal * 6,
-                        ),
-                        TextFormField(
-                          decoration: Style.inputDecoration('First Registration'),
-                          validator: (v) {
-                            if (v.isEmpty) {
-                              return 'input require';
-                            } else
-                              return null;
-                          },
-                          onSaved: (v) {
-                            _carModel.firstRegistration = v.trim();
-                          },
-                        ),
-                        SizedBox(
-                          height: SizeConfig.blockSizeHorizontal * 6,
-                        ),
-                        TextFormField(
-                          decoration: Style.inputDecoration('Registration plate'),
-                          validator: (v) {
-                            if (v.isEmpty) {
-                              return 'input require';
-                            } else
-                              return null;
-                          },
-                          onSaved: (v) {
-                            _carModel.vehicleIdentificationNumber = v.trim();
-                          },
-                        ),
-                        SizedBox(
-                          height: SizeConfig.blockSizeHorizontal * 6,
-                        ),
-                        TextFormField(
-                          decoration: Style.inputDecoration('Brand and Model'),
-                          validator: (v) {
-                            if (v.isEmpty) {
-                              return 'input require';
-                            } else
-                              return null;
-                          },
-                          onSaved: (v) {
-                            _carModel.manufacturerAndBrand = v.trim();
-                          },
-                        ),
-                        SizedBox(
-                          height: SizeConfig.blockSizeHorizontal * 6,
-                        ),
-                        TextFormField(
-                          decoration: Style.inputDecoration('Licence Number'),
-                          validator: (v) {
-                            if (v.isEmpty) {
-                              return 'input require';
-                            } else
-                              return null;
-                          },
-                          onSaved: (v) {
-                            _carModel.licenseNumber = v.trim();
-                          },
-                        ),
-                        SizedBox(
-                          height: SizeConfig.blockSizeHorizontal * 6,
-                        ),
-                        TextFormField(
-                          decoration: Style.inputDecoration('Holder Name'),
-                          validator: (v) {
-                            if (v.isEmpty) {
-                              return 'input require';
-                            } else
-                              return null;
-                          },
-                          onSaved: (v) {
-                            _carModel.holderName = v.trim();
-                          },
-                        ),
-                        SizedBox(
-                          height: SizeConfig.blockSizeHorizontal * 6,
-                        ),
-                        TextFormField(
-                          decoration: Style.inputDecoration('Holder City'),
-                          validator: (v) {
-                            if (v.isEmpty) {
-                              return 'input require';
-                            } else
-                              return null;
-                          },
-                          onSaved: (v) {
-                            _carModel.holderCity = v.trim();
-                          },
-                        ),
-                        SizedBox(
-                          height: SizeConfig.blockSizeHorizontal * 6,
-                        ),
-                        TextFormField(
-                          decoration: Style.inputDecoration('Holder Postcode'),
-                          validator: (v) {
-                            if (v.isEmpty) {
-                              return 'input require';
-                            } else
-                              return null;
-                          },
-                          onSaved: (v) {
-                            _carModel.holderPostcode = v.trim();
-                          },
-                        ),
-                        SizedBox(
-                          height: SizeConfig.blockSizeHorizontal * 6,
-                        ),
-                        TextFormField(
-                          decoration: Style.inputDecoration('Holder Street'),
-                          validator: (v) {
-                            if (v.isEmpty) {
-                              return 'input require';
-                            } else
-                              return null;
-                          },
-                          onSaved: (v) {
-                            _carModel.holderStreet = v.trim();
-                          },
-                        ),
-                        SizedBox(
-                          height: SizeConfig.blockSizeHorizontal * 6,
-                        ),
-                        TextFormField(
-                          decoration: Style.inputDecoration('Owner Name'),
-                          validator: (v) {
-                            if (v.isEmpty) {
-                              return 'input require';
-                            } else
-                              return null;
-                          },
-                          onSaved: (v) {
-                            _carModel.ownerName = v.trim();
-                          },
-                        ),
-                      ],
+            body: SingleChildScrollView(
+              child: Column(
+                //mainAxisAlignment: MainAxisAlignment.spaceAround,
+                //crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 10),
+                    child: Container(
+                      height: 2.0,
+                      width: 500.0,
+                      color: Style.primaryColor,
                     ),
                   ),
-                ),
-                Container(
-                    margin: EdgeInsets.only(bottom: 30, top: 10),
-                    width: 200,
-                    child: ElevatedButton(
-                      style: raisedButtonStyle,
-                      onPressed: () async {
-                        if (_key.currentState.validate()) {
-                          _key.currentState.save();
-                          // print(provider.user.toJson());
-                          // return;
-                          await provider.storeCar(_carModel);
-                          Navigator.of(context).push(
-                              MaterialPageRoute(builder: (_) => MainScreen()));
-                        } else
-                          print('is not validate');
-                      },
-                      child: Text('Fahrzeug hinzufügen'),
-                    )),
-              ],
-            ),
-            )
-        )
-    );
+                  Container(
+                    margin: EdgeInsets.only(bottom: 15),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: SizeConfig.blockSizeHorizontal * 4),
+                    child: Form(
+                      key: _key,
+                      child: Column(
+                        children: <Widget>[
+                          SizedBox(
+                            height: SizeConfig.blockSizeHorizontal * 6,
+                          ),
+                          TextFormField(
+                            decoration:
+                                Style.inputDecoration('Erstmals zugelassen'),
+                            validator: (v) {
+                              if (v.isEmpty) {
+                                return 'input require';
+                              } else
+                                return null;
+                            },
+                            onSaved: (v) {
+                              _carModel.firstRegistration = v.trim();
+                            },
+                          ),
+                          SizedBox(
+                            height: SizeConfig.blockSizeHorizontal * 6,
+                          ),
+                          TextFormField(
+                            decoration: Style.inputDecoration('Kennzeichen'),
+                            validator: (v) {
+                              if (v.isEmpty) {
+                                return 'input require';
+                              } else
+                                return null;
+                            },
+                            onSaved: (v) {
+                              _carModel.vehicleIdentificationNumber = v.trim();
+                            },
+                          ),
+                          SizedBox(
+                            height: SizeConfig.blockSizeHorizontal * 6,
+                          ),
+                          TextFormField(
+                            decoration:
+                                Style.inputDecoration('Marke und Modell'),
+                            validator: (v) {
+                              if (v.isEmpty) {
+                                return 'input require';
+                              } else
+                                return null;
+                            },
+                            onSaved: (v) {
+                              _carModel.manufacturerAndBrand = v.trim();
+                            },
+                          ),
+                          SizedBox(
+                            height: SizeConfig.blockSizeHorizontal * 6,
+                          ),
+                          TextFormField(
+                            decoration:
+                                Style.inputDecoration('Zulassungsnummer'),
+                            validator: (v) {
+                              if (v.isEmpty) {
+                                return 'input require';
+                              } else
+                                return null;
+                            },
+                            onSaved: (v) {
+                              _carModel.licenseNumber = v.trim();
+                            },
+                          ),
+                          SizedBox(
+                            height: SizeConfig.blockSizeHorizontal * 6,
+                          ),
+                          TextFormField(
+                            decoration:
+                                Style.inputDecoration('Name des Halters'),
+                            validator: (v) {
+                              if (v.isEmpty) {
+                                return 'input require';
+                              } else
+                                return null;
+                            },
+                            onSaved: (v) {
+                              _carModel.holderName = v.trim();
+                            },
+                          ),
+                          SizedBox(
+                            height: SizeConfig.blockSizeHorizontal * 6,
+                          ),
+                          TextFormField(
+                            decoration:
+                                Style.inputDecoration('Stadt des Halters'),
+                            validator: (v) {
+                              if (v.isEmpty) {
+                                return 'input require';
+                              } else
+                                return null;
+                            },
+                            onSaved: (v) {
+                              _carModel.holderCity = v.trim();
+                            },
+                          ),
+                          SizedBox(
+                            height: SizeConfig.blockSizeHorizontal * 6,
+                          ),
+                          TextFormField(
+                            decoration:
+                                Style.inputDecoration('PLZ des Halters'),
+                            validator: (v) {
+                              if (v.isEmpty) {
+                                return 'input require';
+                              } else
+                                return null;
+                            },
+                            onSaved: (v) {
+                              _carModel.holderPostcode = v.trim();
+                            },
+                          ),
+                          SizedBox(
+                            height: SizeConfig.blockSizeHorizontal * 6,
+                          ),
+                          TextFormField(
+                            decoration:
+                                Style.inputDecoration('Adresse des Halters'),
+                            validator: (v) {
+                              if (v.isEmpty) {
+                                return 'input require';
+                              } else
+                                return null;
+                            },
+                            onSaved: (v) {
+                              _carModel.holderStreet = v.trim();
+                            },
+                          ),
+                          SizedBox(
+                            height: SizeConfig.blockSizeHorizontal * 6,
+                          ),
+                          TextFormField(
+                            decoration: Style.inputDecoration('Owner Name'),
+                            validator: (v) {
+                              if (v.isEmpty) {
+                                return 'input require';
+                              } else
+                                return null;
+                            },
+                            onSaved: (v) {
+                              _carModel.ownerName = v.trim();
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                      margin: EdgeInsets.only(bottom: 30, top: 10),
+                      width: 200,
+                      child: ElevatedButton(
+                        style: raisedButtonStyle,
+                        onPressed: () async {
+                          if (_key.currentState.validate()) {
+                            _key.currentState.save();
+                            // print(provider.user.toJson());
+                            // return;
+                            await provider.storeCar(_carModel);
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (_) => MainScreen()));
+                          } else
+                            print('is not validate');
+                        },
+                        child: Text('Fahrzeug hinzufügen'),
+                      )),
+                ],
+              ),
+            )));
   }
-
 }
-
