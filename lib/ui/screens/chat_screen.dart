@@ -13,7 +13,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-
 class ChatScreen extends StatefulWidget {
   final ConversationModel conversation;
   const ChatScreen({Key key, this.conversation}) : super(key: key);
@@ -26,6 +25,7 @@ class _ChatScreenState extends State<ChatScreen> {
   TextEditingController messageTextEditController = TextEditingController();
 
   final ConversationModel conversation;
+
   MessageModel message;
 
   ScrollController _scrollController = ScrollController();
@@ -35,6 +35,70 @@ class _ChatScreenState extends State<ChatScreen> {
   File _image;
 
   final ImagePicker imagePicker = ImagePicker();
+
+  Future<void> _showChoiceDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Center(child: Text('Auswählen')),
+            content: SingleChildScrollView(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  GestureDetector(
+                    child: MaterialButton(
+                      child: new Row(
+                        children: <Widget>[
+                          new IconTheme(
+                            data: new IconThemeData(color: Style.primaryColor),
+                            child: new Icon(Icons.camera_alt_outlined),
+                          ),
+                          SizedBox(width: 3),
+                          new Text('Kamera'),
+                        ],
+                      ),
+                    ),
+                    onTap: () {
+                      getImage();
+                    },
+                  ),
+                  GestureDetector(
+                    child: MaterialButton(
+                      child: new Row(
+                        children: <Widget>[
+                          new IconTheme(
+                            data: new IconThemeData(color: Style.primaryColor),
+                            child: new Icon(Icons.add_photo_alternate_outlined),
+                          ),
+                          SizedBox(width: 3),
+                          new Text('Galerie'),
+                        ],
+                      ),
+                    ),
+                    onTap: () {
+                      _openGallery();
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  _openGallery() async {
+    final image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      _image = File(image.path);
+      if (_image != null) {
+        List<int> fileInByte = image.readAsBytesSync();
+        String fileInBase64 = base64Encode(fileInByte);
+        print("Image" + fileInBase64);
+        message.image = fileInBase64;
+      }
+    });
+  }
 
   Future getImage() async {
     final image = await ImagePicker.pickImage(source: ImageSource.camera);
@@ -48,24 +112,25 @@ class _ChatScreenState extends State<ChatScreen> {
       }
     });
   }
-  _makingPhoneCall() async {
-  const url = 'tel:52354353';
-  //const url = 'https://www.google.com/maps';
-  if (await canLaunch(url)) {
-    await launch(url);
-  } else {
-    throw 'Could not launch $url';
-  }
-}
 
-_openMaps() async {
-  const url = 'https://www.google.com/maps/@48.301693,14.2987955,14.69z';
-  if (await canLaunch(url)) {
-    await launch(url);
-  } else {
-    throw 'Could not launch $url';
+  _makingPhoneCall() async {
+    const url = 'tel:52354353';
+    //const url = 'https://www.google.com/maps';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
-}
+
+  _openMaps() async {
+    const url = 'https://www.google.com/maps/@48.301693,14.2987955,14.69z';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   @override
   void initState() {
@@ -97,23 +162,17 @@ _openMaps() async {
           centerTitle: true,
           actions: <Widget>[
             Padding(
-              padding: EdgeInsets.only(right: 20.0),
-              child: GestureDetector(
-                onTap: _openMaps,
-                child: Icon(
-                    Icons.map
-                ),
-              )
-            ),
+                padding: EdgeInsets.only(right: 20.0),
+                child: GestureDetector(
+                  onTap: _openMaps,
+                  child: Icon(Icons.map),
+                )),
             Padding(
-              padding: EdgeInsets.only(right: 20.0),
-              child: GestureDetector(
-                onTap: _makingPhoneCall,
-                child: Icon(
-                    Icons.phone
-                ),
-              )
-            ),
+                padding: EdgeInsets.only(right: 20.0),
+                child: GestureDetector(
+                  onTap: _makingPhoneCall,
+                  child: Icon(Icons.phone),
+                )),
           ],
         ),
         body: Column(
@@ -147,22 +206,40 @@ _openMaps() async {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
+                  if (_image != null)
+                    IconButton(
+                      icon: const Icon(Icons.delete),
+                      onPressed: () {
+                        _image = null;
+                        message.image = null;
+                        setState(() {});
+                      },
+                    ),
+                  if (_image != null)
+                    CircleAvatar(
+                      backgroundColor: Style.primaryColor,
+                      radius: 13,
+                      child: CircleAvatar(
+                        radius: 11,
+                        backgroundImage: Image.file(
+                          _image,
+                          fit: BoxFit.cover,
+                        ).image,
+                      ),
+                    ),
                   IconButton(
                     icon: const Icon(Icons.camera_alt),
-                    tooltip: 'Increase volume by 10',
+                    tooltip: 'Foto',
                     onPressed: () {
-                      getImage();
+                      _showChoiceDialog(context);
                     },
-                  ),
-                  SizedBox(
-                    width: 12,
                   ),
                   Expanded(
                       child: TextField(
                     controller: messageTextEditController,
                     decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintText: 'Nachricht verfassen ...',
+                        hintText: 'Nachricht ...',
                         hintStyle: TextStyle()),
                   )),
                   Provider.of<ConversationProvider>(context).busy
@@ -171,6 +248,11 @@ _openMaps() async {
                           onTap: () async {
                             if (messageTextEditController.text.isEmpty &&
                                 _image.path.isEmpty) return;
+                            if (messageTextEditController.text.isEmpty &&
+                                _image.path.isNotEmpty) {
+                              messageTextEditController.text =
+                                  "just_img_no_text";
+                            }
                             message.body =
                                 messageTextEditController.text.trim();
                             print(message.toJson());
@@ -178,6 +260,8 @@ _openMaps() async {
                                     listen: false)
                                 .storeMessage(message);
                             messageTextEditController.clear();
+                            _image = null;
+                            message.image = null;
                             _scrollController.jumpTo(
                                 _scrollController.position.maxScrollExtent +
                                     23);
