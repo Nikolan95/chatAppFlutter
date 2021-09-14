@@ -41,8 +41,15 @@ dependencies:
   image_picker:
 
 dev_dependencies:
+  flutter_launcher_icons: "^0.9.2"
   flutter_test:
     sdk: flutter
+
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/app-icon.png"
 
 
 # For information on the generic Dart part of this file, see the
@@ -65,6 +72,7 @@ flutter:
     - assets/background.png
     - assets/car_side.png
     - assets/logo-droeschler.png
+    - assets/app-icon.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

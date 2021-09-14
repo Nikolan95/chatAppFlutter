@@ -1,13 +1,13 @@
 import 'dart:convert';
 import 'dart:typed_data';
-import 'package:url_launcher/url_launcher.dart';
+
 import 'package:chat_app/models/message_model.dart';
 import 'package:chat_app/ui/screens/offers/offer_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_bubble/bubble_type.dart';
 import 'package:flutter_chat_bubble/chat_bubble.dart';
 import 'package:flutter_chat_bubble/clippers/chat_bubble_clipper_5.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 
 class FriendMessageCard extends StatelessWidget {
   final MessageModel message;
@@ -18,8 +18,7 @@ class FriendMessageCard extends StatelessWidget {
     this.imageUrl,
   }) : super(key: key);
 
-
-  Uint8List base64decode(String image){
+  Uint8List base64decode(String image) {
     //Codec<String, String> stringToBase64 = utf8.fuse(base64);
     //Uint8List _image =  base64Decode(image);
     //var blob = yourJSONMapHere[image];
@@ -37,74 +36,74 @@ class FriendMessageCard extends StatelessWidget {
         children: <Widget>[
           CircleAvatar(
             backgroundImage: NetworkImage(imageUrl != null
-            ? imageUrl
-            : 'https://s3.amazonaws.com/37assets/svn/765-default-avatar.png'),
+                ? imageUrl
+                : 'https://s3.amazonaws.com/37assets/svn/765-default-avatar.png'),
           ),
           SizedBox(
             width: 12,
           ),
           ChatBubble(
-            clipper: ChatBubbleClipper5(type: BubbleType.receiverBubble),
-            backGroundColor: Color(343438),
-            margin: EdgeInsets.only(top: 20),
-            padding: EdgeInsets.all(15),
-
-
-
-
-            child: message.body != null ? Container(
-              constraints: BoxConstraints(
-                maxWidth: MediaQuery.of(context).size.width * 0.7,
-              ),
-              child: Text(
-                '${message.body}',
-                style: TextStyle(color: Colors.white),
-              ),
-            )
-            : message.offerItems.length > 0 && message.acceptOffer == null ? Container(
-                  child: IconButton(
-                  icon: new Icon(Icons.file_copy),
-                  onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                  builder: (context) => OfferItemScreen(),
-                  settings: RouteSettings(
-                  arguments: message,
-                  ),
-                  ),
-                  )
-            ))
-            : message.acceptOffer == 'accept' ? Container(
-                  child: IconButton(
-                  icon: new Icon(Icons.file_copy),
-                  onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                  builder: (context) => OfferItemScreen(),
-                  settings: RouteSettings(
-                  arguments: message,
-                  ),
-                  ),
-                  )
-            ))
-            : message.file != null ? Container(
-                  child: IconButton(
-                  icon: new Icon(Icons.picture_as_pdf),
-                  onPressed: 
-                      () async {
-                      var url = 'http://192.168.0.21./atev-laravel-backend/public'+ message.file.filePath;
-                      if (await canLaunch(url)) {
-                        await launch(url);
-                      } else {
-                        throw 'Could not launch $url';
-                      }
-                    
-                  },
-            ))
-                : Container(
-                child: Image.memory(base64decode(message.image), scale: 5)
-            )
-          )
+              clipper: ChatBubbleClipper5(type: BubbleType.receiverBubble),
+              backGroundColor: Color(343438),
+              margin: EdgeInsets.only(top: 20),
+              padding: EdgeInsets.all(15),
+              child: (message.body != null &&
+                      message.body != 'just_img_no_text')
+                  ? Container(
+                      constraints: BoxConstraints(
+                        maxWidth: MediaQuery.of(context).size.width * 0.7,
+                      ),
+                      child: Text(
+                        '${message.body}',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    )
+                  : message.offerItems.length > 0 && message.acceptOffer == null
+                      ? Container(
+                          child: IconButton(
+                              icon: new Icon(Icons.file_copy),
+                              onPressed: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => OfferItemScreen(),
+                                      settings: RouteSettings(
+                                        arguments: message,
+                                      ),
+                                    ),
+                                  )))
+                      : message.acceptOffer == 'accept'
+                          ? Container(
+                              child: IconButton(
+                                  icon: new Icon(Icons.file_copy),
+                                  onPressed: () => Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              OfferItemScreen(),
+                                          settings: RouteSettings(
+                                            arguments: message,
+                                          ),
+                                        ),
+                                      )))
+                          : message.file != null
+                              ? Container(
+                                  child: IconButton(
+                                  icon: new Icon(Icons.picture_as_pdf),
+                                  onPressed: () async {
+                                    var url =
+                                        'http://192.168.0.21./atev-laravel-backend/public' +
+                                            message.file.filePath;
+                                    if (await canLaunch(url)) {
+                                      await launch(url);
+                                    } else {
+                                      throw 'Could not launch $url';
+                                    }
+                                  },
+                                ))
+                              : Container(
+                                  child: Image.memory(
+                                      base64decode(message.image),
+                                      scale: 5)))
         ],
       ),
     );
