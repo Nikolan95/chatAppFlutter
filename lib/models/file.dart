@@ -1,21 +1,24 @@
-class TermsAndConditionsModel {
+class File {
   int id;
   int messageId;
-  String body;
+  String name;
+  String filePath;
   String createdAt;
   String updatedAt;
 
-  TermsAndConditionsModel(
+  File(
       {this.id,
       this.messageId,
-      this.body,
+      this.name,
+      this.filePath,
       this.createdAt,
       this.updatedAt});
 
-  TermsAndConditionsModel.fromJson(Map<String, dynamic> json) {
+  File.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     messageId = json['message_id'];
-    body = json['body'];
+    name = json['name'];
+    filePath = json['file_path'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }
@@ -24,7 +27,8 @@ class TermsAndConditionsModel {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['message_id'] = this.messageId;
-    data['body'] = this.body;
+    data['name'] = this.name;
+    data['file_path'] = this.filePath;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
     return data;

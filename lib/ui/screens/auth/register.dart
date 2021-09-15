@@ -1,18 +1,18 @@
+import 'package:chat_app/constants/size_config.dart';
+import 'package:chat_app/constants/style.dart';
 import 'package:chat_app/providers/auth_provider.dart';
-import 'package:chat_app/ui/style.dart';
 import 'package:flutter/material.dart';
-import 'package:chat_app/ui/size_config.dart';
 import 'package:provider/provider.dart';
 
-import 'main_screen.dart';
+import '../home/home.dart';
 
-class SignUpScreen extends StatefulWidget {
+class Register extends StatefulWidget {
   static final routeName = 'sign-up';
   @override
-  _SignUpScreenState createState() => _SignUpScreenState();
+  _RegisterState createState() => _RegisterState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _RegisterState extends State<Register> {
   final _key = GlobalKey<FormState>();
   final _scafoldKey = GlobalKey<ScaffoldState>();
 
@@ -68,8 +68,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: SizeConfig.blockSizeHorizontal * 4),
-              child:  Form(
+              padding: EdgeInsets.symmetric(
+                  horizontal: SizeConfig.blockSizeHorizontal * 4),
+              child: Form(
                 key: _key,
                 child: Column(
                   children: <Widget>[
@@ -82,7 +83,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         } else
                           return null;
                       },
-                      onSaved: (v){
+                      onSaved: (v) {
                         provider.user.name = v.trim();
                       },
                     ),
@@ -98,7 +99,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         } else
                           return null;
                       },
-                      onSaved: (v){
+                      onSaved: (v) {
                         provider.user.company = v.trim();
                       },
                     ),
@@ -114,7 +115,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         } else
                           return null;
                       },
-                      onSaved: (v){
+                      onSaved: (v) {
                         provider.user.street = v.trim();
                       },
                     ),
@@ -130,7 +131,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         } else
                           return null;
                       },
-                      onSaved: (v){
+                      onSaved: (v) {
                         provider.user.city = v.trim();
                       },
                     ),
@@ -146,7 +147,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         } else
                           return null;
                       },
-                      onSaved: (v){
+                      onSaved: (v) {
                         provider.user.phoneNumber = v.trim();
                       },
                     ),
@@ -159,12 +160,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       validator: (v) {
                         if (v.isEmpty) {
                           return 'Email field is empty';
-                        }else if(!isEmail(v)){
+                        } else if (!isEmail(v)) {
                           return 'invalid email form';
                         } else
                           return null;
                       },
-                      onSaved: (v){
+                      onSaved: (v) {
                         provider.user.email = v;
                       },
                     ),
@@ -183,7 +184,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         } else
                           return null;
                       },
-                      onSaved: (v){
+                      onSaved: (v) {
                         provider.user.password = v;
                       },
                     ),
@@ -196,7 +197,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       validator: (v) {
                         if (v.isEmpty) {
                           return 'Confirm Password field is empty';
-                        }else if(v.trim()!= _password.text.trim()){
+                        } else if (v.trim() != _password.text.trim()) {
                           return 'passwords doesn\'t match';
                         } else
                           return null;
@@ -209,33 +210,34 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
               ),
             ),
-           
             Container(
-              margin: EdgeInsets.only(top: 15),
-              width: 200,
+                margin: EdgeInsets.only(top: 15),
+                width: 200,
                 child: ElevatedButton(
-              style: raisedButtonStyle,
-              onPressed: () async {
-                if (_key.currentState.validate()) {
-                  _key.currentState.save();
-                  var result = await provider.register();
-                  if(result){
-                    print('done');
-                    Navigator.of(context).pushReplacementNamed(MainScreen.routeName);
-                  } else{
-                    _scafoldKey.currentState.showSnackBar(SnackBar(
-                      content: Text(Provider.of<AuthProvider>(context, listen: false).message),
-                    ));
-                  }      
-                } else
-                  print('not validated');
-              },
-              child: Text('Speichern'),
-            )),
+                  style: raisedButtonStyle,
+                  onPressed: () async {
+                    if (_key.currentState.validate()) {
+                      _key.currentState.save();
+                      var result = await provider.register();
+                      if (result) {
+                        print('done');
+                        Navigator.of(context)
+                            .pushReplacementNamed(Home.routeName);
+                      } else {
+                        _scafoldKey.currentState.showSnackBar(SnackBar(
+                          content: Text(
+                              Provider.of<AuthProvider>(context, listen: false)
+                                  .message),
+                        ));
+                      }
+                    } else
+                      print('not validated');
+                  },
+                  child: Text('Speichern'),
+                )),
           ],
         ),
       ),
-        
     );
   }
 }
@@ -423,7 +425,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 //                 _scafoldKey.currentState.showSnackBar(SnackBar(
 //                   content: Text(Provider.of<AuthProvider>(context, listen: false).message),
 //                 ));
-//               }      
+//               }
 //             } else
 //               print('not validated');
 //           },

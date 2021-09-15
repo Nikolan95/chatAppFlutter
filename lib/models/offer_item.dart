@@ -1,4 +1,4 @@
-class OfferItemModel {
+class OfferItem {
   int id;
   int messageId;
   String articleNumber;
@@ -9,7 +9,7 @@ class OfferItemModel {
   String createdAt;
   String updatedAt;
 
-  OfferItemModel(
+  OfferItem(
       {this.id,
       this.messageId,
       this.articleNumber,
@@ -20,7 +20,7 @@ class OfferItemModel {
       this.createdAt,
       this.updatedAt});
 
-  OfferItemModel.fromJson(Map<String, dynamic> json) {
+  OfferItem.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     messageId = json['message_id'];
     articleNumber = json['articleNumber'];

@@ -1,96 +1,82 @@
-import 'package:chat_app/models/car_model.dart';
-import 'package:chat_app/ui/screens/car/car_edit.dart';
-import 'package:chat_app/ui/style.dart';
-//import 'package:chat_app/providers/user_provider.dart';
+import 'package:chat_app/providers/user_provider.dart';
 import 'package:flutter/material.dart';
-//import 'package:provider/provider.dart';
+import 'package:provider/provider.dart';
 
-class CarList extends StatelessWidget {
-  final List<CarModel> cars;
+import '../../../constants/style.dart';
+import '../../widgets/cards/car_card.dart';
+import 'car_add.dart';
 
-  CarList(this.cars);
+class CarList extends StatefulWidget {
+  //var _cars = List<CarList>();
+  static final routeName = 'carscreen';
 
+  @override
+  _CarListState createState() => _CarListState();
+}
+
+class _CarListState extends State<CarList> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<UserProvider>(context, listen: false);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    //var provider = Provider.of<UserProvider>(context);
+    var provider = Provider.of<UserProvider>(context);
+    final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
+      onPrimary: Colors.white,
+      primary: Style.primaryColor,
+      minimumSize: Size(88, 36),
+      padding: EdgeInsets.symmetric(horizontal: 16),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(20)),
+      ),
+    );
     return Container(
-      height: 420,
-      padding: EdgeInsets.all(15),
-      // decoration: BoxDecoration(
-      //   border: Border.all(
-      //     color: Colors.red[500],
-      //   ),
-      //   borderRadius: BorderRadius.all(Radius.circular(20))
-      // ),
-      child: ListView.builder(
-        itemBuilder: (car, index) {
-          return SizedBox(
-            child: Card(
-              color: Colors.transparent,
-              elevation: 5,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-                side: BorderSide(color: Style.primaryColor, width: 1),
-                //side: BorderSide(width: 5, color: Colors.green)
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: Image.asset("assets/background.png").image,
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: SingleChildScrollView(
+          child: Column(
+            //mainAxisAlignment: MainAxisAlignment.spaceAround,
+            //crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Container(
+                  margin: EdgeInsets.only(top: 35, bottom: 15),
+                  child: Image.asset(
+                    'assets/logo-atev-white.png',
+                  )),
+              Padding(
+                padding: EdgeInsets.only(bottom: 25),
+                child: Container(
+                    height: 2.0, width: 500.0, color: Style.primaryColor),
               ),
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                      flex: 2,
-                      child: Container(
-                        margin:
-                            EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                        padding: EdgeInsets.all(5),
-                        child: Material(
-                            color: Colors.transparent,
-                            child: InkWell(
-                                child: IconButton(
-                              icon: Image.asset('assets/car_side.png'),
-                              iconSize: 25,
-                            ))),
-                      )),
-                  Expanded(
-                      flex: 5,
-                      child: Container(
-                        alignment: Alignment.centerLeft,
-                        child: Column(
-                          children: <Widget>[
-                            Text(
-                              cars[index].manufacturerAndBrand,
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              cars[index].licenseNumber.toString(),
-                              style: TextStyle(color: Colors.grey),
-                            ),
-                          ],
-                        ),
-                      )),
-                  Expanded(
-                      flex: 2,
-                      child: Container(
-                          margin: EdgeInsets.only(right: 10),
-                          child: Material(
-                              color: Colors.transparent,
-                              child: InkWell(
-                                  child: IconButton(
-                                icon: new Icon(Icons.edit),
-                                onPressed: () => Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                        builder: (_) => CarEdit(),
-                                        settings: RouteSettings(
-                                          arguments: cars[index]
-                                        ),
-                                        )),
-                              )))))
-                ],
+              Container(
+                height: 40,
+                child: Text(
+                  'Meine Fahrzeuge',
+                  style: TextStyle(fontSize: 20),
+                ),
               ),
-            ),
-          );
-        },
-        itemCount: cars.length,
+              Container(
+                  child: ElevatedButton(
+                style: raisedButtonStyle,
+                onPressed: () => Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (_) => CarAdd())),
+                child: Text('Neues Fahrung hinzufügen'),
+              )),
+              CarCard(provider.user.cars),
+            ],
+          ),
+        ),
       ),
     );
   }

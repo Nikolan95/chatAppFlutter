@@ -1,11 +1,11 @@
+import 'package:chat_app/constants/size_config.dart';
 import 'package:chat_app/providers/user_provider.dart';
-import 'package:chat_app/ui/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../style.dart';
+import '../../../constants/style.dart';
 
-class EditProfileScreen extends StatelessWidget {
+class UserEditProfile extends StatelessWidget {
   final _key = GlobalKey<FormState>();
   final _scafoldKey = GlobalKey<ScaffoldState>();
 

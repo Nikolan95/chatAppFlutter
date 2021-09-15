@@ -1,25 +1,25 @@
-import 'package:chat_app/models/car_model.dart';
-import 'package:chat_app/providers/conversation_provider.dart';
+import 'package:chat_app/models/car.dart';
+import 'package:chat_app/providers/chat_provider.dart';
 import 'package:chat_app/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../style.dart';
-import 'main_screen.dart';
+import '../../../constants/style.dart';
+import '../home/home.dart';
 
-class NewConversation extends StatefulWidget {
-  final List<CarModel> cars;
+class NewChat extends StatefulWidget {
+  final List<Car> cars;
 
-  NewConversation(this.cars);
+  NewChat(this.cars);
   @override
-  _NewConversationState createState() => _NewConversationState(this.cars);
+  _NewChatState createState() => _NewChatState(this.cars);
 }
 
-class _NewConversationState extends State<NewConversation> {
-  List<CarModel> cars;
+class _NewChatState extends State<NewChat> {
+  List<Car> cars;
 
   int _value;
-  _NewConversationState(this.cars);
+  _NewChatState(this.cars);
   @override
   void initState() {
     super.initState();
@@ -49,13 +49,12 @@ class _NewConversationState extends State<NewConversation> {
         return;
       }
 
-      await Provider.of<ConversationProvider>(context, listen: false)
-          .storeConversation(enteredUserId.toString(), enteredMessage,
-              enteredCarId.toString());
+      await Provider.of<ChatProvider>(context, listen: false).storeChat(
+          enteredUserId.toString(), enteredMessage, enteredCarId.toString());
 
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => MainScreen()),
+        MaterialPageRoute(builder: (context) => Home()),
       );
     }
 
@@ -94,7 +93,7 @@ class _NewConversationState extends State<NewConversation> {
                   height: 50,
                   child: DropdownButton(
                       value: _value,
-                      items: cars.map((CarModel item) {
+                      items: cars.map((Car item) {
                         return DropdownMenuItem(
                           child: Text(item.manufacturerAndBrand),
                           value: item.id,

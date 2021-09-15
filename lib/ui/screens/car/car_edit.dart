@@ -1,11 +1,11 @@
-import 'package:chat_app/models/car_model.dart';
+import 'package:chat_app/constants/size_config.dart';
+import 'package:chat_app/models/car.dart';
 import 'package:chat_app/providers/user_provider.dart';
-import 'package:chat_app/ui/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../style.dart';
-import 'car_screen.dart';
+import '../../../constants/style.dart';
+import 'car_list.dart';
 
 class CarEdit extends StatelessWidget {
   final _key = GlobalKey<FormState>();
@@ -14,16 +14,22 @@ class CarEdit extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<UserProvider>(context);
-    final CarModel car = ModalRoute.of(context).settings.arguments;
+    final Car car = ModalRoute.of(context).settings.arguments;
 
-    final firstRegistrationController = TextEditingController(text: car.firstRegistration);
-    final vehicleIdentificationNumberController = TextEditingController(text: car.vehicleIdentificationNumber);
-    final manufacturerAndBrandController = TextEditingController(text: car.manufacturerAndBrand);
-    final licenseNumberController = TextEditingController(text: car.licenseNumber);
+    final firstRegistrationController =
+        TextEditingController(text: car.firstRegistration);
+    final vehicleIdentificationNumberController =
+        TextEditingController(text: car.vehicleIdentificationNumber);
+    final manufacturerAndBrandController =
+        TextEditingController(text: car.manufacturerAndBrand);
+    final licenseNumberController =
+        TextEditingController(text: car.licenseNumber);
     final holderNameController = TextEditingController(text: car.holderName);
     final holderCityController = TextEditingController(text: car.holderCity);
-    final holderPostcodeController = TextEditingController(text: car.holderPostcode);
-    final holderStreetController = TextEditingController(text: car.holderStreet);
+    final holderPostcodeController =
+        TextEditingController(text: car.holderPostcode);
+    final holderStreetController =
+        TextEditingController(text: car.holderStreet);
     final ownerNameController = TextEditingController(text: car.ownerName);
 
     final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
@@ -35,35 +41,38 @@ class CarEdit extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(20)),
       ),
     );
-    void submitData(){
-    final enteredFirstregistration = firstRegistrationController.text;
-    final enteredVehicleidentificationnumber = vehicleIdentificationNumberController.text;
-    final enteredManufacturerandbrand = manufacturerAndBrandController.text;
-    final enteredLicensenumber = licenseNumberController.text;
-    final enteredHoldername = holderNameController.text;
-    final enteredHoldercity = holderCityController.text;
-    final enteredHolderpostcode= holderPostcodeController.text;
-    final enteredHolderstreet = holderStreetController.text;
-    final enteredOwnername = ownerNameController.text;
+    void submitData() {
+      final enteredFirstregistration = firstRegistrationController.text;
+      final enteredVehicleidentificationnumber =
+          vehicleIdentificationNumberController.text;
+      final enteredManufacturerandbrand = manufacturerAndBrandController.text;
+      final enteredLicensenumber = licenseNumberController.text;
+      final enteredHoldername = holderNameController.text;
+      final enteredHoldercity = holderCityController.text;
+      final enteredHolderpostcode = holderPostcodeController.text;
+      final enteredHolderstreet = holderStreetController.text;
+      final enteredOwnername = ownerNameController.text;
 
-    CarModel editedCar = new CarModel();
+      Car editedCar = new Car();
 
-    editedCar.id = car.id;
-    editedCar.firstRegistration = enteredFirstregistration;
-    editedCar.vehicleIdentificationNumber = enteredVehicleidentificationnumber;
-    editedCar.manufacturerAndBrand = enteredManufacturerandbrand;
-    editedCar.licenseNumber = enteredLicensenumber;
-    editedCar.holderName = enteredHoldername;
-    editedCar.holderCity = enteredHoldercity;
-    editedCar.holderPostcode = enteredHolderpostcode;
-    editedCar.holderStreet = enteredHolderstreet;
-    editedCar.ownerName = enteredOwnername;
-    editedCar.userId = car.userId;
-    
-    provider.updateCar(editedCar);
+      editedCar.id = car.id;
+      editedCar.firstRegistration = enteredFirstregistration;
+      editedCar.vehicleIdentificationNumber =
+          enteredVehicleidentificationnumber;
+      editedCar.manufacturerAndBrand = enteredManufacturerandbrand;
+      editedCar.licenseNumber = enteredLicensenumber;
+      editedCar.holderName = enteredHoldername;
+      editedCar.holderCity = enteredHoldercity;
+      editedCar.holderPostcode = enteredHolderpostcode;
+      editedCar.holderStreet = enteredHolderstreet;
+      editedCar.ownerName = enteredOwnername;
+      editedCar.userId = car.userId;
 
-    Navigator.of(context).push(MaterialPageRoute(builder: (_) => CarScreen()));
-  }
+      provider.updateCar(editedCar);
+
+      Navigator.of(context).push(MaterialPageRoute(builder: (_) => CarList()));
+    }
+
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -109,8 +118,9 @@ class CarEdit extends StatelessWidget {
                         child: Column(
                           children: <Widget>[
                             TextFormField(
-                              decoration: Style.inputDecoration('First Registration'),
-                              controller: firstRegistrationController,   
+                              decoration:
+                                  Style.inputDecoration('First Registration'),
+                              controller: firstRegistrationController,
                               validator: (v) {
                                 if (v.isEmpty) {
                                   return 'input require';
@@ -122,8 +132,9 @@ class CarEdit extends StatelessWidget {
                               height: SizeConfig.blockSizeHorizontal * 6,
                             ),
                             TextFormField(
-                              decoration: Style.inputDecoration('Registration plate'),
-                              controller: licenseNumberController,  
+                              decoration:
+                                  Style.inputDecoration('Registration plate'),
+                              controller: licenseNumberController,
                               validator: (v) {
                                 if (v.isEmpty) {
                                   return 'input require';
@@ -135,8 +146,9 @@ class CarEdit extends StatelessWidget {
                               height: SizeConfig.blockSizeHorizontal * 6,
                             ),
                             TextFormField(
-                              decoration: Style.inputDecoration('Brand and Model'),
-                              controller: manufacturerAndBrandController,  
+                              decoration:
+                                  Style.inputDecoration('Brand and Model'),
+                              controller: manufacturerAndBrandController,
                               validator: (v) {
                                 if (v.isEmpty) {
                                   return 'input require';
@@ -148,8 +160,9 @@ class CarEdit extends StatelessWidget {
                               height: SizeConfig.blockSizeHorizontal * 6,
                             ),
                             TextFormField(
-                              decoration: Style.inputDecoration('Licence Number'),
-                              controller: licenseNumberController,  
+                              decoration:
+                                  Style.inputDecoration('Licence Number'),
+                              controller: licenseNumberController,
                               validator: (v) {
                                 if (v.isEmpty) {
                                   return 'input require';
@@ -162,7 +175,7 @@ class CarEdit extends StatelessWidget {
                             ),
                             TextFormField(
                               decoration: Style.inputDecoration('Holder Name'),
-                              controller: holderNameController,  
+                              controller: holderNameController,
                               validator: (v) {
                                 if (v.isEmpty) {
                                   return 'input require';
@@ -175,7 +188,7 @@ class CarEdit extends StatelessWidget {
                             ),
                             TextFormField(
                               decoration: Style.inputDecoration('Holder City'),
-                              controller: holderCityController,  
+                              controller: holderCityController,
                               validator: (v) {
                                 if (v.isEmpty) {
                                   return 'input require';
@@ -187,8 +200,9 @@ class CarEdit extends StatelessWidget {
                               height: SizeConfig.blockSizeHorizontal * 6,
                             ),
                             TextFormField(
-                              decoration: Style.inputDecoration('Holder Postcode'),
-                              controller: holderPostcodeController,  
+                              decoration:
+                                  Style.inputDecoration('Holder Postcode'),
+                              controller: holderPostcodeController,
                               validator: (v) {
                                 if (v.isEmpty) {
                                   return 'input require';
@@ -200,8 +214,9 @@ class CarEdit extends StatelessWidget {
                               height: SizeConfig.blockSizeHorizontal * 6,
                             ),
                             TextFormField(
-                              controller: holderCityController,  
-                              decoration: Style.inputDecoration('Holder Street'),
+                              controller: holderCityController,
+                              decoration:
+                                  Style.inputDecoration('Holder Street'),
                               validator: (v) {
                                 if (v.isEmpty) {
                                   return 'input require';
@@ -214,7 +229,7 @@ class CarEdit extends StatelessWidget {
                             ),
                             TextFormField(
                               decoration: Style.inputDecoration('Owner Name'),
-                              controller: ownerNameController,  
+                              controller: ownerNameController,
                               validator: (v) {
                                 if (v.isEmpty) {
                                   return 'input require';

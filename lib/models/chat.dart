@@ -1,26 +1,26 @@
-import 'package:chat_app/models/car_model.dart';
-import 'package:chat_app/models/message_model.dart';
-import 'package:chat_app/models/user_model.dart';
+import 'package:chat_app/models/car.dart';
+import 'package:chat_app/models/chat_message.dart';
+import 'package:chat_app/models/user.dart';
 
-class ConversationModel {
+class Chat {
   int id;
-  UserModel user;
-  CarModel car;
+  User user;
+  Car car;
   String createdAt;
-  List<MessageModel> messages;
+  List<ChatMessage> messages;
 
-  ConversationModel({this.id, this.user, this.car, this.createdAt, this.messages});
+  Chat({this.id, this.user, this.car, this.createdAt, this.messages});
 
-  ConversationModel.fromJson(Map<String, dynamic> json) {
+  Chat.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    user = json['user'] != null ? new UserModel.fromJson(json['user']) : null;
-    car = json['car'] != null ? new CarModel.fromJson(json['car']) : null;
+    user = json['user'] != null ? new User.fromJson(json['user']) : null;
+    car = json['car'] != null ? new Car.fromJson(json['car']) : null;
     createdAt = json['created_at'];
     if (json['messages'] != null) {
-      messages = new List<MessageModel>();
+      messages = new List<ChatMessage>();
       //List<MessageModel> messages = [];
       json['messages'].forEach((v) {
-        messages.add(new MessageModel.fromJson(v));
+        messages.add(new ChatMessage.fromJson(v));
       });
     }
   }

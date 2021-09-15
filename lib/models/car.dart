@@ -1,4 +1,4 @@
-class CarModel {
+class Car {
   int id;
   int userId;
   String firstRegistration;
@@ -13,7 +13,7 @@ class CarModel {
   String createdAt;
   String updatedAt;
 
-  CarModel(
+  Car(
       {this.id,
       this.userId,
       this.firstRegistration,
@@ -28,7 +28,7 @@ class CarModel {
       this.createdAt,
       this.updatedAt});
 
-  CarModel.fromJson(Map<String, dynamic> json) {
+  Car.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     userId = json['user_id'];
     firstRegistration = json['first_registration'];

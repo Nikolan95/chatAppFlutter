@@ -1,15 +1,15 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:chat_app/models/message_model.dart';
+import 'package:chat_app/models/chat_message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_bubble/bubble_type.dart';
 import 'package:flutter_chat_bubble/chat_bubble.dart';
 import 'package:flutter_chat_bubble/clippers/chat_bubble_clipper_5.dart';
 
-class MyMessageCard extends StatelessWidget {
-  final MessageModel message;
-  const MyMessageCard({
+class UserChatBubble extends StatelessWidget {
+  final ChatMessage message;
+  const UserChatBubble({
     Key key,
     this.message,
   }) : super(key: key);

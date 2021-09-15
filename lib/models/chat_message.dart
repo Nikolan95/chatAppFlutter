@@ -1,60 +1,59 @@
-import 'package:chat_app/models/terms_and_conditions_model.dart';
+import 'package:chat_app/models/terms_and_conditions.dart';
 
-import 'file_model.dart';
-import 'offeritem_model.dart';
+import 'file.dart';
+import 'offer_item.dart';
 
-class MessageModel   {
+class ChatMessage {
   int id;
   String body;
   int read;
   int userId;
-  int conversationId;
+  int chatId;
   String acceptOffer;
   String createdAt;
   String updatedAt;
   String image;
-  FileModel file;
-  List<OfferItemModel> offerItems;
-  List<TermsAndConditionsModel> termsAndConditions;
+  File file;
+  List<OfferItem> offerItems;
+  List<TermsAndConditions> termsAndConditions;
 
-  MessageModel  ({
-    this.id,
-    this.body,
-    this.read,
-    this.userId,
-    this.acceptOffer,
-    this.conversationId,
-    this.createdAt,
-    this.updatedAt,
-    this.image,
-    this.file,
-    this.offerItems,
-    this.termsAndConditions
-  });
+  ChatMessage(
+      {this.id,
+      this.body,
+      this.read,
+      this.userId,
+      this.acceptOffer,
+      this.chatId,
+      this.createdAt,
+      this.updatedAt,
+      this.image,
+      this.file,
+      this.offerItems,
+      this.termsAndConditions});
 
-  MessageModel  .fromJson(Map<String, dynamic> json) {
+  ChatMessage.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     body = json['body'];
     read = json['read'];
     userId = json['user_id'];
     acceptOffer = json['accept_offer'];
-    conversationId = json['conversation_id'];
+    chatId = json['conversation_id'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     image = json['image'];
-    file = json['file'] != null ? new FileModel.fromJson(json['file']) : null;
+    file = json['file'] != null ? new File.fromJson(json['file']) : null;
     if (json['offeritems'] != null) {
-      offerItems = new List<OfferItemModel>();
+      offerItems = new List<OfferItem>();
       //List<MessageModel> messages = [];
       json['offeritems'].forEach((v) {
-        offerItems.add(new OfferItemModel.fromJson(v));
+        offerItems.add(new OfferItem.fromJson(v));
       });
     }
     if (json['termsandconditions'] != null) {
-      termsAndConditions = new List<TermsAndConditionsModel>();
+      termsAndConditions = new List<TermsAndConditions>();
       //List<MessageModel> messages = [];
       json['termsandconditions'].forEach((v) {
-        termsAndConditions.add(new TermsAndConditionsModel.fromJson(v));
+        termsAndConditions.add(new TermsAndConditions.fromJson(v));
       });
     }
   }
@@ -66,7 +65,7 @@ class MessageModel   {
     data['read'] = this.read;
     data['user_id'] = this.userId;
     data['accept_offer'] = this.acceptOffer;
-    data['conversation_id'] = this.conversationId;
+    data['conversation_id'] = this.chatId;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
     data['image'] = this.image;

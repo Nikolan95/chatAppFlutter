@@ -1,21 +1,21 @@
-import 'package:chat_app/models/car_model.dart';
+import 'package:chat_app/models/car.dart';
 import 'package:chat_app/providers/user_provider.dart';
-import 'package:chat_app/ui/screens/main_screen.dart';
+import 'package:chat_app/ui/screens/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../size_config.dart';
-import '../../style.dart';
+import '../../../constants/size_config.dart';
+import '../../../constants/style.dart';
 
 class CarAdd extends StatefulWidget {
   @override
-  CarAddState createState() {
-    return CarAddState();
+  _CarAddState createState() {
+    return _CarAddState();
   }
 }
 
-class CarAddState extends State<CarAdd> {
-  CarModel _carModel = new CarModel();
+class _CarAddState extends State<CarAdd> {
+  Car _carModel = new Car();
   final _key = GlobalKey<FormState>();
   final _scafoldKey = GlobalKey<ScaffoldState>();
 
@@ -229,8 +229,8 @@ class CarAddState extends State<CarAdd> {
                             // print(provider.user.toJson());
                             // return;
                             await provider.storeCar(_carModel);
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (_) => MainScreen()));
+                            Navigator.of(context).push(
+                                MaterialPageRoute(builder: (_) => Home()));
                           } else
                             print('is not validate');
                         },
