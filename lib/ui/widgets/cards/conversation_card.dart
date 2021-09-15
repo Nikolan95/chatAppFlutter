@@ -68,7 +68,17 @@ class ConversationCard extends StatelessWidget {
         children:<Widget>[ 
           conversation.messages.last.read == 0 && conversation.messages.last.userId != provider.user.id
           ?
-          Text(conversation.messages.last.body != null
+          Text(
+            conversation.messages.last.body == 'just_img_no_text'
+            ? 'image'
+            :conversation.messages.last.body.split(':')[0] == 'http'
+            ? 'image'
+            :conversation.messages.last.body == 'just_pdf_no_text'
+            ? 'pdf'
+            : conversation.messages.last.body == 'just_offer_no_text'
+            ? 'offer'
+            : conversation.messages.last.body != null && conversation.messages.last.body != 'just_img_no_text'
+              && conversation.messages.last.body != 'just_pdf_no_text' && conversation.messages.last.body != 'just_offer_no_text'
             ? conversation.messages.last.body
             : 'document',
             style: TextStyle(
@@ -77,7 +87,17 @@ class ConversationCard extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),)
           :
-          Text(conversation.messages.last.body != null
+          Text(
+            conversation.messages.last.body == 'just_img_no_text' 
+            ? 'image'
+            :conversation.messages.last.body.split(':')[0] == 'http'
+            ? 'image'
+            :conversation.messages.last.body == 'just_pdf_no_text'
+            ? 'pdf'
+            : conversation.messages.last.body == 'just_offer_no_text'
+            ? 'offer'
+            : conversation.messages.last.body != null && conversation.messages.last.body != 'just_img_no_text'
+              && conversation.messages.last.body != 'just_pdf_no_text' && conversation.messages.last.body != 'just_offer_no_text'
             ? conversation.messages.last.body
             : 'document'),
           newMessages != 0

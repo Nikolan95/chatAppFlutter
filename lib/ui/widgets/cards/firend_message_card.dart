@@ -47,16 +47,21 @@ class FriendMessageCard extends StatelessWidget {
               backGroundColor: Color(343438),
               margin: EdgeInsets.only(top: 20),
               padding: EdgeInsets.all(15),
-              child: (message.body != null &&
-                      message.body != 'just_img_no_text')
+              child: message.body != null &&
+                      message.body != 'just_img_no_text' &&
+                      message.body != 'just_pdf_no_text' &&
+                      message.body != 'just_offer_no_text' 
                   ? Container(
                       constraints: BoxConstraints(
                         maxWidth: MediaQuery.of(context).size.width * 0.7,
                       ),
-                      child: Text(
+                      child: 
+                      message.body.split(':')[0] == 'http'
+                      ?Image.network(message.body)
+                      :Text(
                         '${message.body}',
                         style: TextStyle(color: Colors.white),
-                      ),
+                      )
                     )
                   : message.offerItems.length > 0 && message.acceptOffer == null
                       ? Container(
@@ -85,7 +90,7 @@ class FriendMessageCard extends StatelessWidget {
                                           ),
                                         ),
                                       )))
-                          : message.file != null
+                          : message.body == 'just_pdf_no_text'
                               ? Container(
                                   child: IconButton(
                                   icon: new Icon(Icons.picture_as_pdf),
@@ -100,10 +105,14 @@ class FriendMessageCard extends StatelessWidget {
                                     }
                                   },
                                 ))
-                              : Container(
-                                  child: Image.memory(
+                
+                              :Container(
+                                  child:
+                                    Image.memory(
                                       base64decode(message.image),
-                                      scale: 5)))
+                                      scale: 5)
+                                  ),
+                                )
         ],
       ),
     );
