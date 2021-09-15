@@ -69,7 +69,9 @@ class ConversationCard extends StatelessWidget {
           conversation.messages.last.read == 0 && conversation.messages.last.userId != provider.user.id
           ?
           Text(
-            conversation.messages.last.body == 'just_img_no_text'
+            conversation.messages.last.body.split('.').last == 'pdf'
+            ? 'pdf'
+            :conversation.messages.last.body == 'just_img_no_text'
             ? 'image'
             :conversation.messages.last.body.split(':')[0] == 'http'
             ? 'image'
@@ -88,7 +90,9 @@ class ConversationCard extends StatelessWidget {
             ),)
           :
           Text(
-            conversation.messages.last.body == 'just_img_no_text' 
+            conversation.messages.last.body.split('.').last == 'pdf'
+            ? 'pdf'
+            :conversation.messages.last.body == 'just_img_no_text' 
             ? 'image'
             :conversation.messages.last.body.split(':')[0] == 'http'
             ? 'image'

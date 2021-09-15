@@ -56,7 +56,34 @@ class FriendMessageCard extends StatelessWidget {
                         maxWidth: MediaQuery.of(context).size.width * 0.7,
                       ),
                       child: 
-                      message.body.split(':')[0] == 'http'
+                      message.body == 'angebotNotification'
+                      ? Container(
+                          child: IconButton(
+                              icon: new Icon(Icons.file_copy),
+                              onPressed: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => OfferItemScreen(),
+                                      settings: RouteSettings(
+                                        arguments: message,
+                                      ),
+                                    ),
+                                  )))
+                      :message.body.split('.').last == 'pdf'
+                      ?Container(
+                                  child: IconButton(
+                                  icon: new Icon(Icons.picture_as_pdf),
+                                  onPressed: () async {
+                                    var url =
+                                        message.body;
+                                    if (await canLaunch(url)) {
+                                      await launch(url);
+                                    } else {
+                                      throw 'Could not launch $url';
+                                    }
+                                  },
+                                ))
+                      :message.body.split(':')[0] == 'http'
                       ?Image.network(message.body)
                       :Text(
                         '${message.body}',
