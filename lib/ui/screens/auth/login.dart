@@ -1,19 +1,19 @@
 import 'package:chat_app/providers/auth_provider.dart';
-import 'package:chat_app/ui/screens/main_screen.dart';
+import 'package:chat_app/ui/screens/home/home.dart';
 import 'package:chat_app/ui/widgets/buttons/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../size_config.dart';
-import '../style.dart';
+import '../../../constants/size_config.dart';
+import '../../../constants/style.dart';
 
-class LoginScreen extends StatefulWidget {
+class Login extends StatefulWidget {
   static final routeName = 'login';
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _LoginState createState() => _LoginState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginState extends State<Login> {
   final _key = GlobalKey<FormState>();
   final _scafoldKey = GlobalKey<ScaffoldState>();
 
@@ -105,8 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         .login(_email.text, _password.text);
 
                 if (login) {
-                  Navigator.of(context)
-                      .pushReplacementNamed(MainScreen.routeName);
+                  Navigator.of(context).pushReplacementNamed(Home.routeName);
                 } else {
                   _scafoldKey.currentState.showSnackBar(SnackBar(
                     content: Text(

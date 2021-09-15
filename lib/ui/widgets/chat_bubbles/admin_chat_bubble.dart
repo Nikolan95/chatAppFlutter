@@ -1,18 +1,18 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:chat_app/models/message_model.dart';
-import 'package:chat_app/ui/screens/offers/offer_view.dart';
+import 'package:chat_app/models/chat_message.dart';
+import 'package:chat_app/ui/screens/offer/offer_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_bubble/bubble_type.dart';
 import 'package:flutter_chat_bubble/chat_bubble.dart';
 import 'package:flutter_chat_bubble/clippers/chat_bubble_clipper_5.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class FriendMessageCard extends StatelessWidget {
-  final MessageModel message;
+class AdminChatBubble extends StatelessWidget {
+  final ChatMessage message;
   final String imageUrl;
-  const FriendMessageCard({
+  const AdminChatBubble({
     Key key,
     this.message,
     this.imageUrl,
@@ -43,27 +43,26 @@ class FriendMessageCard extends StatelessWidget {
             width: 12,
           ),
           ChatBubble(
-              clipper: ChatBubbleClipper5(type: BubbleType.receiverBubble),
-              backGroundColor: Color(343438),
-              margin: EdgeInsets.only(top: 20),
-              padding: EdgeInsets.all(15),
-              child: message.body != null &&
-                      message.body != 'just_img_no_text' &&
-                      message.body != 'just_pdf_no_text' &&
-                      message.body != 'just_offer_no_text' 
-                  ? Container(
-                      constraints: BoxConstraints(
-                        maxWidth: MediaQuery.of(context).size.width * 0.7,
-                      ),
-                      child: 
-                      message.body == 'angebotNotification'
+            clipper: ChatBubbleClipper5(type: BubbleType.receiverBubble),
+            backGroundColor: Color(343438),
+            margin: EdgeInsets.only(top: 20),
+            padding: EdgeInsets.all(15),
+            child: message.body != null &&
+                    message.body != 'just_img_no_text' &&
+                    message.body != 'just_pdf_no_text' &&
+                    message.body != 'just_offer_no_text'
+                ? Container(
+                    constraints: BoxConstraints(
+                      maxWidth: MediaQuery.of(context).size.width * 0.7,
+                    ),
+                    child: message.body == 'angebotNotification'
                       ? Container(
                           child: IconButton(
                               icon: new Icon(Icons.file_copy),
                               onPressed: () => Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => OfferItemScreen(),
+                                      builder: (context) => OfferScreen(),
                                       settings: RouteSettings(
                                         arguments: message,
                                       ),
@@ -97,7 +96,7 @@ class FriendMessageCard extends StatelessWidget {
                               onPressed: () => Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => OfferItemScreen(),
+                                      builder: (context) => OfferScreen(),
                                       settings: RouteSettings(
                                         arguments: message,
                                       ),
@@ -111,7 +110,7 @@ class FriendMessageCard extends StatelessWidget {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              OfferItemScreen(),
+                                              OfferScreen(),
                                           settings: RouteSettings(
                                             arguments: message,
                                           ),

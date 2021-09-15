@@ -1,27 +1,27 @@
 import 'dart:convert';
 
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
-import 'package:chat_app/models/message_model.dart';
-import 'package:chat_app/providers/conversation_provider.dart';
+import 'package:chat_app/constants/style.dart';
+import 'package:chat_app/models/chat_message.dart';
+import 'package:chat_app/providers/chat_provider.dart';
 import 'package:chat_app/providers/user_provider.dart';
-import 'package:chat_app/ui/screens/conversation_screen.dart';
-import 'package:chat_app/ui/screens/users/profile_screen.dart';
-import 'package:chat_app/ui/style.dart';
+import 'package:chat_app/ui/screens/chat/chat_list.dart';
+import 'package:chat_app/ui/screens/user/user_profile.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
 
-import '../../main.dart';
-import 'car/car_screen.dart';
+import '../../../main.dart';
+import '../car/car_list.dart';
 
-class MainScreen extends StatefulWidget {
+class Home extends StatefulWidget {
   static final routeName = 'main';
   @override
-  _MainScreenState createState() => _MainScreenState();
+  _HomeState createState() => _HomeState();
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _HomeState extends State<Home> {
   int currentIndex = 0;
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
 
@@ -54,12 +54,10 @@ class _MainScreenState extends State<MainScreen> {
                 icon: '@mipmap/ic_launcher',
               ),
             ));
-        if(message.notification.body != null)
-        {
+        if (message.notification.body != null) {
           print(message.data['message']);
           handleNotification(message.data['message'], false);
-        }
-        else if(message.data['image'] != null){
+        } else if (message.data['image'] != null) {
           print(message.data['message']);
           //handleNotification(message.data['message'], false);
         }
@@ -104,11 +102,11 @@ class _MainScreenState extends State<MainScreen> {
     //print(data);
     var messageJson = json.decode(data);
     //print(messageJson['image'] + 'to je to');
-    var message = MessageModel.fromJson(messageJson);
+    var message = ChatMessage.fromJson(messageJson);
     //print(message.toJson());
     //print(message.conversationId);
-    Provider.of<ConversationProvider>(context, listen: false)
-        .addMessageToConversation(message.conversationId, message);
+    Provider.of<ChatProvider>(context, listen: false)
+        .addMessageToChat(message.chatId, message);
     //print(messageJson);
   }
 
@@ -119,7 +117,7 @@ class _MainScreenState extends State<MainScreen> {
       body: PageView(
         physics: NeverScrollableScrollPhysics(),
         controller: _pageController,
-        children: <Widget>[ConversationScreen(), CarScreen(), ProfileScreen()],
+        children: <Widget>[ChatList(), CarList(), UserProfile()],
       ),
       bottomNavigationBar: BubbleBottomBar(
         opacity: .2,

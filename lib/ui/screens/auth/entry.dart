@@ -1,22 +1,22 @@
 //import 'package:chat_app/providers/auth_provider.dart';
+import 'package:chat_app/constants/size_config.dart';
 import 'package:chat_app/providers/auth_provider.dart';
-import 'package:chat_app/ui/screens/login_screen.dart';
-import 'package:chat_app/ui/screens/signup_screen.dart';
-import 'package:chat_app/ui/size_Config.dart';
+import 'package:chat_app/ui/screens/auth/login.dart';
+import 'package:chat_app/ui/screens/auth/register.dart';
 import 'package:chat_app/ui/widgets/buttons/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'main_screen.dart';
+import '../home/home.dart';
 
-class WelcomeScreen extends StatefulWidget {
+class Entry extends StatefulWidget {
   static final routeName = 'welcome';
 
   @override
-  _WelcomeScreenState createState() => _WelcomeScreenState();
+  _EntryState createState() => _EntryState();
 }
 
-class _WelcomeScreenState extends State<WelcomeScreen> {
+class _EntryState extends State<Entry> {
   @override
   void initState() {
     super.initState();
@@ -25,7 +25,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       var userExists =
           await Provider.of<AuthProvider>(context, listen: false).getUser();
       if (userExists) {
-        Navigator.of(context).pushReplacementNamed(MainScreen.routeName);
+        Navigator.of(context).pushReplacementNamed(Home.routeName);
       }
     });
   }
@@ -57,7 +57,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 children: <Widget>[
                   PrimaryButton(
                     onTap: () =>
-                        Navigator.of(context).pushNamed(LoginScreen.routeName),
+                        Navigator.of(context).pushNamed(Login.routeName),
                     child: Text(
                       'Anmelden',
                       textAlign: TextAlign.center,
@@ -69,7 +69,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   ),
                   PrimaryButton(
                     onTap: () =>
-                        Navigator.of(context).pushNamed(SignUpScreen.routeName),
+                        Navigator.of(context).pushNamed(Register.routeName),
                     child: Text(
                       'Registrieren',
                       textAlign: TextAlign.center,

@@ -1,48 +1,50 @@
 import 'dart:io';
-import 'package:path/path.dart';
+
 import 'package:http/http.dart' as http;
+import 'package:path/path.dart';
 
 class Api {
-    static final _api = Api._internal();
+  static final _api = Api._internal();
 
-    factory Api(){
-        return _api;
+  factory Api() {
+    return _api;
+  }
+  Api._internal();
+
+  //IOS Simulator
+  //String devUrl = 'localhost:8000';
+
+  //Android Simulator
+  String devUrl = '10.0.2.2:8000';
+
+  //Live
+  //String devUrl = 'app.atev.de';
+
+  String path = '/api';
+  String token;
+
+  Future<http.Response> httpGet(String endPath, {Map<String, String> query}) {
+    Uri url = Uri.http(devUrl, '$path/$endPath');
+
+    if (query != null) {
+      url = Uri.http(devUrl, '$path/$endPath', query);
     }
-    Api._internal();
+    return http.get(url, headers: {
+      'Authorization': 'Bearer $token',
+      'Accept': 'application/json',
+    });
+  }
 
-    //IOS Simulator
-    //String devUrl = 'localhost:8000';
+  Future<http.Response> httpPost(String endPath, Object body) {
+    Uri url = Uri.http(devUrl, '$path/$endPath');
 
-    //Android Simulator
-    //String devUrl = '10.0.2.2:8000';
+    return http.post(url, body: body, headers: {
+      'Authorization': 'Bearer $token',
+      'Accept': 'application/json',
+    });
+  }
 
-    //Live
-    String devUrl = 'app.atev.de';
-
-    String path = '/api';
-    String token;
-
-    Future<http.Response> httpGet(String endPath,{Map<String, String> query}){
-        Uri url = Uri.https(devUrl, '$path/$endPath');
-
-        if(query != null){
-            url = Uri.https(devUrl, '$path/$endPath', query);
-        }
-        return http.get(url, headers: {
-            'Authorization': 'Bearer $token',
-            'Accept': 'application/json',
-        });
-    }
-
-    Future<http.Response> httpPost(String endPath,Object body){
-        Uri url = Uri.https(devUrl, '$path/$endPath');
-
-        return http.post(url,body: body, headers: {
-            'Authorization': 'Bearer $token',
-            'Accept': 'application/json',
-        });
-    }
-    Future<http.Response> httpPostWithFile(String endPath, {File file}) async {
+  Future<http.Response> httpPostWithFile(String endPath, {File file}) async {
     Map<String, String> headers = {
       'Authorization': 'Bearer $token',
       'Accept': 'application/json',

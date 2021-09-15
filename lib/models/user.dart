@@ -1,6 +1,6 @@
-import 'package:chat_app/models/car_model.dart';
+import 'package:chat_app/models/car.dart';
 
-class UserModel {
+class User {
   int id;
   String name;
   String company;
@@ -10,11 +10,21 @@ class UserModel {
   String email;
   String password;
   String imageUrl;
-  List<CarModel> cars;
+  List<Car> cars;
 
-  UserModel({this.id, this.name, this.company, this.street, this.city, this.phoneNumber, this.email, this.imageUrl, this.password, this.cars});
+  User(
+      {this.id,
+      this.name,
+      this.company,
+      this.street,
+      this.city,
+      this.phoneNumber,
+      this.email,
+      this.imageUrl,
+      this.password,
+      this.cars});
 
-  UserModel.fromJson(Map<String, dynamic> json) {
+  User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     company = json['company'];
@@ -24,10 +34,10 @@ class UserModel {
     email = json['email'];
     imageUrl = json['image_url'];
     if (json['cars'] != null) {
-      cars = new List<CarModel>();
+      cars = new List<Car>();
       //List<MessageModel> messages = [];
       json['cars'].forEach((v) {
-        cars.add(new CarModel.fromJson(v));
+        cars.add(new Car.fromJson(v));
       });
     }
   }

@@ -1,36 +1,36 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:chat_app/models/conversation_model.dart';
-import 'package:chat_app/models/message_model.dart';
-import 'package:chat_app/providers/conversation_provider.dart';
-import 'package:chat_app/ui/size_config.dart';
-import 'package:chat_app/ui/style.dart';
-import 'package:chat_app/ui/widgets/cards/firend_message_card.dart';
-import 'package:chat_app/ui/widgets/cards/my_message_card.dart';
+import 'package:chat_app/constants/size_config.dart';
+import 'package:chat_app/constants/style.dart';
+import 'package:chat_app/models/chat.dart';
+import 'package:chat_app/models/chat_message.dart';
+import 'package:chat_app/providers/chat_provider.dart';
+import 'package:chat_app/ui/widgets/chat_bubbles/admin_chat_bubble.dart';
+import 'package:chat_app/ui/widgets/chat_bubbles/user_chat_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ChatScreen extends StatefulWidget {
-  final ConversationModel conversation;
-  const ChatScreen({Key key, this.conversation}) : super(key: key);
+  final Chat chat;
+  const ChatScreen({Key key, this.chat}) : super(key: key);
 
   @override
-  _ChatScreenState createState() => _ChatScreenState(this.conversation);
+  _ChatScreenState createState() => _ChatScreenState(this.chat);
 }
 
 class _ChatScreenState extends State<ChatScreen> {
   TextEditingController messageTextEditController = TextEditingController();
 
-  final ConversationModel conversation;
+  final Chat chat;
 
-  MessageModel message;
+  ChatMessage message;
 
   ScrollController _scrollController = ScrollController();
 
-  _ChatScreenState(this.conversation);
+  _ChatScreenState(this.chat);
 
   File _image;
 
@@ -123,7 +123,6 @@ class _ChatScreenState extends State<ChatScreen> {
     }
   }
 
-
   _openMaps() async {
     const url = 'https://www.google.com/maps/@48.301693,14.2987955,14.69z';
     if (await canLaunch(url)) {
@@ -136,8 +135,8 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   void initState() {
     super.initState();
-    message = MessageModel();
-    message.conversationId = conversation.id;
+    message = ChatMessage();
+    message.chatId = chat.id;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
     });
@@ -159,7 +158,7 @@ class _ChatScreenState extends State<ChatScreen> {
             onPressed: () => Navigator.of(context).pop(),
             icon: Icon(Icons.arrow_back_ios),
           ),
-          title: Text('${conversation.user.name}'),
+          title: Text('${chat.user.name}'),
           centerTitle: true,
           actions: <Widget>[
             Padding(
@@ -186,15 +185,15 @@ class _ChatScreenState extends State<ChatScreen> {
                   horizontal: SizeConfig.safeBlockHorizontal * 4,
                   vertical: SizeConfig.safeBlockVertical * 3,
                 ),
-                itemCount: conversation.messages.length,
+                itemCount: chat.messages.length,
                 itemBuilder: (context, index) =>
-                    conversation.messages[index].userId == conversation.user.id
-                        ? FriendMessageCard(
-                            message: conversation.messages[index],
-                            imageUrl: conversation.user.imageUrl,
+                    chat.messages[index].userId == chat.user.id
+                        ? AdminChatBubble(
+                            message: chat.messages[index],
+                            imageUrl: chat.user.imageUrl,
                           )
-                        : MyMessageCard(
-                            message: conversation.messages[index],
+                        : UserChatBubble(
+                            message: chat.messages[index],
                           ),
               ),
             ),
@@ -243,7 +242,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         hintText: 'Nachricht ...',
                         hintStyle: TextStyle()),
                   )),
-                  Provider.of<ConversationProvider>(context).busy
+                  Provider.of<ChatProvider>(context).busy
                       ? CircularProgressIndicator()
                       : InkWell(
                           onTap: () async {
@@ -257,7 +256,7 @@ class _ChatScreenState extends State<ChatScreen> {
                             message.body =
                                 messageTextEditController.text.trim();
                             print(message.toJson());
-                            await Provider.of<ConversationProvider>(context,
+                            await Provider.of<ChatProvider>(context,
                                     listen: false)
                                 .storeMessage(message);
                             messageTextEditController.clear();

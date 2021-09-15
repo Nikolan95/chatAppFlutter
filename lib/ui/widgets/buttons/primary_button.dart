@@ -1,7 +1,7 @@
+import 'package:chat_app/constants/size_config.dart';
 import 'package:flutter/material.dart';
 
-import '../../size_Config.dart';
-import '../../style.dart';
+import '../../../constants/style.dart';
 
 class PrimaryButton extends StatelessWidget {
   final Widget child;
