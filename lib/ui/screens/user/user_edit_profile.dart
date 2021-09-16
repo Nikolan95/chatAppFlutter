@@ -1,5 +1,6 @@
 import 'package:chat_app/constants/size_config.dart';
 import 'package:chat_app/providers/user_provider.dart';
+import 'package:chat_app/ui/screens/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -184,6 +185,8 @@ class UserEditProfile extends StatelessWidget {
                               // print(provider.user.toJson());
                               // return;
                               var result = await provider.updateUser();
+                              Navigator.of(context).push(
+                                  MaterialPageRoute(builder: (_) => Home()));
                               if (!result) {
                                 _scafoldKey.currentState.showSnackBar(SnackBar(
                                   content: Text(Provider.of<UserProvider>(

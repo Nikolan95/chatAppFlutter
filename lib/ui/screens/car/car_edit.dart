@@ -1,6 +1,7 @@
 import 'package:chat_app/constants/size_config.dart';
 import 'package:chat_app/models/car.dart';
 import 'package:chat_app/providers/user_provider.dart';
+import 'package:chat_app/ui/screens/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -245,11 +246,15 @@ class CarEdit extends StatelessWidget {
                       ),
                     ),
                     Container(
-                        margin: EdgeInsets.only(top: 15),
+                        margin: EdgeInsets.only(bottom: 30),
                         width: 200,
                         child: ElevatedButton(
                           style: raisedButtonStyle,
-                          onPressed: submitData,
+                          onPressed: () async {
+                            submitData();
+                            Navigator.of(context).push(
+                                MaterialPageRoute(builder: (_) => Home()));
+                          },
                           child: Text('Speichern'),
                         )),
                   ],
