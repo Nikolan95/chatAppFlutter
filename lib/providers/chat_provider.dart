@@ -71,7 +71,7 @@ class ChatProvider extends BaseProvider {
       print(response.body);
       notifyListeners();
       setBusy(false);
-      return _chats;
+      return sortChats(_chats);
     }
   }
 
@@ -102,7 +102,7 @@ class ChatProvider extends BaseProvider {
         notifyListeners();
         setBusy(false);
       }
-      return _chats;
+      return sortChats(_chats);
     }
     setBusy(false);
   }
