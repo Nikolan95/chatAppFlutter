@@ -68,16 +68,18 @@ class ChatCard extends StatelessWidget {
             chat.messages.last.read == 0 &&
                     chat.messages.last.userId != provider.user.id
                 ? Text(
-            chat.messages.last.body.split('.').last == 'pdf'
-            ? 'pdf'
+            chat.messages.last.body == 'angebotNotification'
+            ? 'angebot'
+            :chat.messages.last.body.split('.').last == 'pdf'
+            ? 'PDF'
             :chat.messages.last.body == 'just_img_no_text'
-            ? 'image'
+            ? 'Bild'
             :chat.messages.last.body.split(':')[0] == 'http'
-            ? 'image'
+            ? 'Bild'
             :chat.messages.last.body == 'just_pdf_no_text'
-            ? 'pdf'
+            ? 'PDF'
             : chat.messages.last.body == 'just_offer_no_text'
-            ? 'offer'
+            ? 'angebot'
             : chat.messages.last.body != null && chat.messages.last.body != 'just_img_no_text'
               && chat.messages.last.body != 'just_pdf_no_text' && chat.messages.last.body != 'just_offer_no_text'
             ? chat.messages.last.body
@@ -89,16 +91,18 @@ class ChatCard extends StatelessWidget {
                     ),
                   )
                 : Text(
-            chat.messages.last.body.split('.').last == 'pdf'
-            ? 'pdf'
+            chat.messages.last.body == 'angebotNotification'
+            ? 'angebot'
+            :chat.messages.last.body.split('.').last == 'pdf'
+            ? 'PDF'
             :chat.messages.last.body == 'just_img_no_text' 
-            ? 'image'
+            ? 'Bild'
             :chat.messages.last.body.split(':')[0] == 'http'
-            ? 'image'
+            ? 'Bild'
             :chat.messages.last.body == 'just_pdf_no_text'
-            ? 'pdf'
+            ? 'PDF'
             : chat.messages.last.body == 'just_offer_no_text'
-            ? 'offer'
+            ? 'angebot'
             : chat.messages.last.body != null && chat.messages.last.body != 'just_img_no_text'
               && chat.messages.last.body != 'just_pdf_no_text' && chat.messages.last.body != 'just_offer_no_text'
             ? chat.messages.last.body

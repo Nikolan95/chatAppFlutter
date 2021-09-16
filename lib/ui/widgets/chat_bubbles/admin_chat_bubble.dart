@@ -59,7 +59,9 @@ class AdminChatBubble extends StatelessWidget {
                       ? Container(
                           child: IconButton(
                               icon: new Icon(Icons.file_copy),
-                              onPressed: () => Navigator.push(
+                              onPressed: () 
+                              //{print(message.termsAndConditions);}))
+                              => Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) => OfferScreen(),
