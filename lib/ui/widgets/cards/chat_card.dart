@@ -2,7 +2,7 @@ import 'package:chat_app/models/chat.dart';
 import 'package:chat_app/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:timeago/timeago.dart' as timeago;
+import 'package:time_ago_provider/time_ago_provider.dart' as timeAgo;
 
 class ChatCard extends StatelessWidget {
   final Chat chat;
@@ -55,7 +55,8 @@ class ChatCard extends StatelessWidget {
                   ),
                 ),
           Text(
-            '${timeago.format(DateTime.parse(chat.messages.last.createdAt))}',
+            '${timeAgo.format(DateTime.parse(chat.messages.last.createdAt), locale: 'de')}',
+            overflow: TextOverflow.ellipsis,
             style: TextStyle(
               color: Colors.white.withOpacity(0.7),
               fontSize: 14,
@@ -63,14 +64,46 @@ class ChatCard extends StatelessWidget {
           ),
         ],
       ),
-      subtitle: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            chat.messages.last.read == 0 &&
-                    chat.messages.last.userId != provider.user.id
-                ? Text(
+      subtitle:
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <
+              Widget>[
+        chat.messages.last.read == 0 &&
+                chat.messages.last.userId != provider.user.id
+            ? Text(
+                chat.messages.last.body == 'angebotNotification'
+                    ? 'Angebot'
+                    : chat.messages.last.body.split('.').last == 'pdf'
+                        ? 'PDF'
+                        : chat.messages.last.body == 'just_img_no_text'
+                            ? 'Bild'
+                            : chat.messages.last.body.split(':')[0] == 'http'
+                                ? 'Bild'
+                                : chat.messages.last.body == 'just_pdf_no_text'
+                                    ? 'PDF'
+                                    : chat.messages.last.body ==
+                                            'just_offer_no_text'
+                                        ? 'Angebot'
+                                        : chat.messages.last.body != null &&
+                                                chat.messages.last.body !=
+                                                    'just_img_no_text' &&
+                                                chat.messages.last.body !=
+                                                    'just_pdf_no_text' &&
+                                                chat.messages.last.body !=
+                                                    'just_offer_no_text'
+                                            ? chat.messages.last.body
+                                            : 'Dokument',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                ),
+              )
+            : Expanded(
+                child: new Container(
+                margin: EdgeInsets.only(top: 5),
+                child: new Text(
                     chat.messages.last.body == 'angebotNotification'
-                        ? 'angebot'
+                        ? 'Angebot'
                         : chat.messages.last.body.split('.').last == 'pdf'
                             ? 'PDF'
                             : chat.messages.last.body == 'just_img_no_text'
@@ -92,55 +125,29 @@ class ChatCard extends StatelessWidget {
                                                     chat.messages.last.body !=
                                                         'just_offer_no_text'
                                                 ? chat.messages.last.body
-                                                : 'document',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
+                                                : 'Dokument',
+                    overflow: TextOverflow.ellipsis),
+              )),
+        newMessages != 0
+            ? Container(
+                //margin: const EdgeInsets.all(30.0),
+                padding: const EdgeInsets.all(5.0),
+                decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.yellow[700],
                     ),
-                  )
-                : Text(chat.messages.last.body == 'angebotNotification'
-                    ? 'angebot'
-                    : chat.messages.last.body.split('.').last == 'pdf'
-                        ? 'PDF'
-                        : chat.messages.last.body == 'just_img_no_text'
-                            ? 'Bild'
-                            : chat.messages.last.body.split(':')[0] == 'http'
-                                ? 'Bild'
-                                : chat.messages.last.body == 'just_pdf_no_text'
-                                    ? 'PDF'
-                                    : chat.messages.last.body ==
-                                            'just_offer_no_text'
-                                        ? 'angebot'
-                                        : chat.messages.last.body != null &&
-                                                chat.messages.last.body !=
-                                                    'just_img_no_text' &&
-                                                chat.messages.last.body !=
-                                                    'just_pdf_no_text' &&
-                                                chat.messages.last.body !=
-                                                    'just_offer_no_text'
-                                            ? chat.messages.last.body
-                                            : 'document'),
-            newMessages != 0
-                ? Container(
-                    //margin: const EdgeInsets.all(30.0),
-                    padding: const EdgeInsets.all(5.0),
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.yellow[700],
-                        ),
-                        borderRadius: BorderRadius.all(Radius.circular(30))),
-                    child: Text(
-                      '${newMessages}',
-                      style: TextStyle(
-                        color: Colors.yellow[700],
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                      ),
-                    ),
-                  )
-                : Text(''),
-          ]),
+                    borderRadius: BorderRadius.all(Radius.circular(30))),
+                child: Text(
+                  '${newMessages}',
+                  style: TextStyle(
+                    color: Colors.yellow[700],
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                  ),
+                ),
+              )
+            : Text(''),
+      ]),
     ));
   }
 }

@@ -48,7 +48,7 @@ class _CarAddState extends State<CarAdd> {
                 onPressed: () => Navigator.of(context).pop(),
                 icon: Icon(Icons.arrow_back_ios),
               ),
-              title: Text('Neues Fahrzeug'),
+              title: Text('Neues Fahrzeug anlegen'),
               centerTitle: true,
             ),
             body: SingleChildScrollView(
@@ -57,7 +57,7 @@ class _CarAddState extends State<CarAdd> {
                 //crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   Padding(
-                    padding: EdgeInsets.only(bottom: 10),
+                    padding: EdgeInsets.only(bottom: 5),
                     child: Container(
                       height: 2.0,
                       width: 500.0,
@@ -80,7 +80,7 @@ class _CarAddState extends State<CarAdd> {
                                 Style.inputDecoration('Erstmals zugelassen'),
                             validator: (v) {
                               if (v.isEmpty) {
-                                return 'input require';
+                                return 'Eingabe erforderlich';
                               } else
                                 return null;
                             },
@@ -111,7 +111,7 @@ class _CarAddState extends State<CarAdd> {
                                 Style.inputDecoration('Marke und Modell'),
                             validator: (v) {
                               if (v.isEmpty) {
-                                return 'input require';
+                                return 'Eingabe erforderlich';
                               } else
                                 return null;
                             },
@@ -127,7 +127,7 @@ class _CarAddState extends State<CarAdd> {
                                 Style.inputDecoration('Zulassungsnummer'),
                             validator: (v) {
                               if (v.isEmpty) {
-                                return 'input require';
+                                return 'Eingabe erforderlich';
                               } else
                                 return null;
                             },
@@ -143,7 +143,7 @@ class _CarAddState extends State<CarAdd> {
                                 Style.inputDecoration('Name des Halters'),
                             validator: (v) {
                               if (v.isEmpty) {
-                                return 'input require';
+                                return 'Eingabe erforderlich';
                               } else
                                 return null;
                             },
@@ -159,7 +159,7 @@ class _CarAddState extends State<CarAdd> {
                                 Style.inputDecoration('Stadt des Halters'),
                             validator: (v) {
                               if (v.isEmpty) {
-                                return 'input require';
+                                return 'Eingabe erforderlich';
                               } else
                                 return null;
                             },
@@ -175,7 +175,7 @@ class _CarAddState extends State<CarAdd> {
                                 Style.inputDecoration('PLZ des Halters'),
                             validator: (v) {
                               if (v.isEmpty) {
-                                return 'input require';
+                                return 'Eingabe erforderlich';
                               } else
                                 return null;
                             },
@@ -191,7 +191,7 @@ class _CarAddState extends State<CarAdd> {
                                 Style.inputDecoration('Adresse des Halters'),
                             validator: (v) {
                               if (v.isEmpty) {
-                                return 'input require';
+                                return 'Eingabe erforderlich';
                               } else
                                 return null;
                             },
@@ -203,10 +203,11 @@ class _CarAddState extends State<CarAdd> {
                             height: SizeConfig.blockSizeHorizontal * 6,
                           ),
                           TextFormField(
-                            decoration: Style.inputDecoration('Owner Name'),
+                            decoration: Style.inputDecoration(
+                                'Besitzer Vor- & Nachname'),
                             validator: (v) {
                               if (v.isEmpty) {
-                                return 'input require';
+                                return 'Eingabe erforderlich';
                               } else
                                 return null;
                             },

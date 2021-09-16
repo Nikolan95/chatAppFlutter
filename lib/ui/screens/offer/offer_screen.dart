@@ -48,7 +48,7 @@ class OfferScreen extends StatelessWidget {
           return DataRow(cells: getCells(cells));
         }).toList();
     Widget buildDataTable() {
-      final columns = ['Name', 'Qty', 'Price', 'Total'];
+      final columns = ['Name', 'Stk', 'Preis', 'Gesamt'];
 
       return Container(
         height: 225,
@@ -117,7 +117,7 @@ class OfferScreen extends StatelessWidget {
               Container(
                 alignment: Alignment.topLeft,
                 padding: EdgeInsets.only(left: 20),
-                child: Text('Terms and Conditions:'),
+                child: Text('Liefer- & Zahlungsbedingungen:'),
               ),
               Container(
                 height: 200,
@@ -144,7 +144,7 @@ class OfferScreen extends StatelessWidget {
                 alignment: Alignment.topRight,
                 padding: EdgeInsets.only(top: 10, right: 30),
                 child: Text(
-                  'Total ' +
+                  'Gesamtsumme ' +
                       NumberFormat.simpleCurrency(locale: 'eu').format(sum),
                 ),
               ),
@@ -160,7 +160,7 @@ class OfferScreen extends StatelessWidget {
                       padding: EdgeInsets.only(top: 30, right: 20),
                     ),
                     label: Text(
-                      'Ja',
+                      'JA',
                       style: TextStyle(fontSize: 30),
                     ),
                     onPressed: accept,
@@ -172,7 +172,7 @@ class OfferScreen extends StatelessWidget {
                       padding: EdgeInsets.only(top: 30),
                     ),
                     label: Text(
-                      'Nein',
+                      'NEIN',
                       style: TextStyle(fontSize: 30),
                     ),
                     onPressed: decline,

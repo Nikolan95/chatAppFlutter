@@ -36,10 +36,12 @@ class _ChatScreenState extends State<ChatScreen> {
 
   final ImagePicker imagePicker = ImagePicker();
 
-  Future<void> _showChoiceDialog(BuildContext context) {
+  Future<void> _showChoiceDialog(BuildContext context) async {
+    BuildContext dialogContext;
     return showDialog(
         context: context,
         builder: (BuildContext context) {
+          dialogContext = context;
           return AlertDialog(
             title: Center(child: Text('Auswählen')),
             content: SingleChildScrollView(
@@ -61,6 +63,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     ),
                     onTap: () {
                       getImage();
+                      Navigator.pop(context);
                     },
                   ),
                   GestureDetector(
@@ -78,6 +81,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     ),
                     onTap: () {
                       _openGallery();
+                      Navigator.pop(context);
                     },
                   ),
                 ],

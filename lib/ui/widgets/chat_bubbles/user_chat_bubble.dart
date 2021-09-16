@@ -48,10 +48,10 @@ class UserChatBubble extends StatelessWidget {
               : Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Container(
-                        padding: EdgeInsets.only(bottom: 12),
-                        child: Image.memory(base64decode(message.image),
-                            scale: 5)),
+                        Container(
+                            padding: EdgeInsets.only(bottom: 12),
+                            child: Image.memory(base64decode(message.image),
+                                scale: 7)),
                     if (message.body != "just_img_no_text")
                       Text(
                         '${message.body}',

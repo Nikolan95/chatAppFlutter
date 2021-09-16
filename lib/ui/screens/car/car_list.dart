@@ -55,7 +55,7 @@ class _CarListState extends State<CarList> {
                     'assets/logo-atev-white.png',
                   )),
               Padding(
-                padding: EdgeInsets.only(bottom: 25),
+                padding: EdgeInsets.only(bottom: 15),
                 child: Container(
                     height: 2.0, width: 500.0, color: Style.primaryColor),
               ),

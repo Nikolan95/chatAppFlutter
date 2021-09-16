@@ -41,106 +41,113 @@ class _LaunchingState extends State<Launching> {
       ),
     );
     SizeConfig().init(context);
-    return Scaffold(
-      backgroundColor: Style.darkColor,
-      body: Provider.of<AuthProvider>(context, listen: false).busy
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
-          : SingleChildScrollView(
-              child: Column(
-                //mainAxisAlignment: MainAxisAlignment.spaceAround,
-                //crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  Container(
-                      margin: EdgeInsets.only(top: 35, bottom: 15),
-                      child: Image.asset(
-                        'assets/logo-atev-white.png',
-                      )),
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 20),
-                    child: Container(
-                      height: 2.0,
-                      width: 500.0,
-                      color: Style.primaryColor,
-                    ),
+    return Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: Image.asset("assets/background.png").image,
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          body: Provider.of<AuthProvider>(context, listen: false).busy
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : SingleChildScrollView(
+                  child: Column(
+                    //mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    //crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      Container(
+                          margin: EdgeInsets.only(top: 35, bottom: 15),
+                          child: Image.asset(
+                            'assets/logo-atev-white.png',
+                          )),
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 20),
+                        child: Container(
+                          height: 2.0,
+                          width: 500.0,
+                          color: Style.primaryColor,
+                        ),
+                      ),
+                      Container(
+                        height: 80,
+                        margin: EdgeInsets.only(top: 30),
+                        child: Text(
+                          'Hallo !',
+                          style: TextStyle(fontSize: 30),
+                        ),
+                      ),
+                      Container(
+                        child: Text(
+                          'Willkommen in der modernsten',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ),
+                      Container(
+                        height: 40,
+                        child: Text(
+                          'Autoteile-App',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ),
+                      Container(
+                        child: Text(
+                          'Keine Wartezeiten -',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ),
+                      Container(
+                        height: 40,
+                        child: Text(
+                          'immer der beste Service!',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ),
+                      Container(
+                        child: Text(
+                          'Einfach und unkompliziert eine',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ),
+                      Container(
+                        child: Text(
+                          'Anfrage an den Autoteile-Händler',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ),
+                      Container(
+                        child: Text(
+                          'senden und innerhalb kürzester',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ),
+                      Container(
+                        child: Text(
+                          'Zeit das gewünschte Autoteil',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ),
+                      Container(
+                        child: Text(
+                          'geliefert bekommen!',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ),
+                      Container(
+                          margin: EdgeInsets.only(top: 50),
+                          width: 200,
+                          child: ElevatedButton(
+                            style: raisedButtonStyle,
+                            onPressed: () => Navigator.of(context)
+                                .pushNamed(Entry.routeName),
+                            child: Text('Weiter'),
+                          )),
+                    ],
                   ),
-                  Container(
-                    height: 80,
-                    margin: EdgeInsets.only(top: 30),
-                    child: Text(
-                      'Hallo !',
-                      style: TextStyle(fontSize: 30),
-                    ),
-                  ),
-                  Container(
-                    child: Text(
-                      'Willkomen in der modernesten',
-                      style: TextStyle(fontSize: 18),
-                    ),
-                  ),
-                  Container(
-                    height: 40,
-                    child: Text(
-                      'Autoteile-App',
-                      style: TextStyle(fontSize: 18),
-                    ),
-                  ),
-                  Container(
-                    child: Text(
-                      'Keine Wartezeiten -',
-                      style: TextStyle(fontSize: 18),
-                    ),
-                  ),
-                  Container(
-                    height: 40,
-                    child: Text(
-                      'immer der beste Service!',
-                      style: TextStyle(fontSize: 18),
-                    ),
-                  ),
-                  Container(
-                    child: Text(
-                      'Einfach und unkompliziert eine',
-                      style: TextStyle(fontSize: 18),
-                    ),
-                  ),
-                  Container(
-                    child: Text(
-                      'Anfrage an den Autoteile-Händler',
-                      style: TextStyle(fontSize: 18),
-                    ),
-                  ),
-                  Container(
-                    child: Text(
-                      'senden und innerhalb kürzerster',
-                      style: TextStyle(fontSize: 18),
-                    ),
-                  ),
-                  Container(
-                    child: Text(
-                      'Zeit das gewünschte Autoteil',
-                      style: TextStyle(fontSize: 18),
-                    ),
-                  ),
-                  Container(
-                    child: Text(
-                      'geliefert bekommen!',
-                      style: TextStyle(fontSize: 18),
-                    ),
-                  ),
-                  Container(
-                      margin: EdgeInsets.only(top: 50),
-                      width: 200,
-                      child: ElevatedButton(
-                        style: raisedButtonStyle,
-                        onPressed: () =>
-                            Navigator.of(context).pushNamed(Entry.routeName),
-                        child: Text('Speichern'),
-                      )),
-                ],
-              ),
-            ),
-    );
+                ),
+        ));
   }
 }

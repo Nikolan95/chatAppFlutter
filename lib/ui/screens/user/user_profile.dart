@@ -41,7 +41,7 @@ class UserProfile extends StatelessWidget {
                       'assets/logo-atev-white.png',
                     )),
                 Padding(
-                  padding: EdgeInsets.only(bottom: 25),
+                  padding: EdgeInsets.only(bottom: 15),
                   child: Container(
                     height: 2.0,
                     width: 500.0,
@@ -49,7 +49,7 @@ class UserProfile extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  height: 50,
+                  height: 40,
                   child: Text(
                     'Meine Daten',
                     style: TextStyle(fontSize: 20),
@@ -284,7 +284,7 @@ class UserProfile extends StatelessWidget {
                   ),
                 ),
                 Container(
-                    margin: EdgeInsets.only(top: 15),
+                    margin: EdgeInsets.only(top: 10, bottom: 15),
                     width: 200,
                     child: ElevatedButton(
                       style: raisedButtonStyle,

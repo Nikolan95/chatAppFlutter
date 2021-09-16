@@ -43,40 +43,40 @@ class AdminChatBubble extends StatelessWidget {
             width: 12,
           ),
           ChatBubble(
-            clipper: ChatBubbleClipper5(type: BubbleType.receiverBubble),
-            backGroundColor: Color(343438),
-            margin: EdgeInsets.only(top: 20),
-            padding: EdgeInsets.all(15),
-            child: message.body != null &&
-                    message.body != 'just_img_no_text' &&
-                    message.body != 'just_pdf_no_text' &&
-                    message.body != 'just_offer_no_text'
-                ? Container(
-                    constraints: BoxConstraints(
-                      maxWidth: MediaQuery.of(context).size.width * 0.7,
-                    ),
-                    child: message.body == 'angebotNotification'
-                      ? Container(
-                          child: IconButton(
-                              icon: new Icon(Icons.file_copy),
-                              onPressed: () 
-                              //{print(message.termsAndConditions);}))
-                              => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => OfferScreen(),
-                                      settings: RouteSettings(
-                                        arguments: message,
-                                      ),
-                                    ),
-                                  )))
-                      :message.body.split('.').last == 'pdf'
-                      ?Container(
+              clipper: ChatBubbleClipper5(type: BubbleType.receiverBubble),
+              backGroundColor: Color(343438),
+              margin: EdgeInsets.only(top: 20),
+              padding: EdgeInsets.all(15),
+              child: message.body != null &&
+                      message.body != 'just_img_no_text' &&
+                      message.body != 'just_pdf_no_text' &&
+                      message.body != 'just_offer_no_text'
+                  ? Container(
+                      constraints: BoxConstraints(
+                        maxWidth: MediaQuery.of(context).size.width * 0.7,
+                      ),
+                      child: message.body == 'angebotNotification'
+                          ? Container(
+                              child: IconButton(
+                                  icon: new Icon(Icons.file_copy),
+                                  onPressed: ()
+                                      //{print(message.termsAndConditions);}))
+                                      =>
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => OfferScreen(),
+                                          settings: RouteSettings(
+                                            arguments: message,
+                                          ),
+                                        ),
+                                      )))
+                          : message.body.split('.').last == 'pdf'
+                              ? Container(
                                   child: IconButton(
                                   icon: new Icon(Icons.picture_as_pdf),
                                   onPressed: () async {
-                                    var url =
-                                        message.body;
+                                    var url = message.body;
                                     if (await canLaunch(url)) {
                                       await launch(url);
                                     } else {
@@ -84,13 +84,12 @@ class AdminChatBubble extends StatelessWidget {
                                     }
                                   },
                                 ))
-                      :message.body.split(':')[0] == 'http'
-                      ?Image.network(message.body)
-                      :Text(
-                        '${message.body}',
-                        style: TextStyle(color: Colors.white),
-                      )
-                    )
+                              : message.body.split(':')[0] == 'http'
+                                  ? Image.network(message.body)
+                                  : Text(
+                                      '${message.body}',
+                                      style: TextStyle(color: Colors.white),
+                                    ))
                   : message.offerItems.length > 0 && message.acceptOffer == null
                       ? Container(
                           child: IconButton(
@@ -111,8 +110,7 @@ class AdminChatBubble extends StatelessWidget {
                                   onPressed: () => Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) =>
-                                              OfferScreen(),
+                                          builder: (context) => OfferScreen(),
                                           settings: RouteSettings(
                                             arguments: message,
                                           ),
@@ -133,13 +131,10 @@ class AdminChatBubble extends StatelessWidget {
                                     }
                                   },
                                 ))
-                
-                              :Container(
-                                  child:
-                                    Image.memory(
-                                      base64decode(message.image),
-                                      scale: 5)
-                                  ),
+                                  :Container(
+                                      child: Image.memory(
+                                          base64decode(message.image),
+                                          scale: 7)),
                                 )
         ],
       ),
