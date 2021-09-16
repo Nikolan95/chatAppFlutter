@@ -26,7 +26,8 @@ class ChatCard extends StatelessWidget {
     }
     int newMessages = unread.length;
     //print(newMessages);
-    return ListTile(
+    return SingleChildScrollView(
+        child: ListTile(
       onTap: onTap,
       leading: ClipOval(
         child: Image.network(chat.user.imageUrl != null
@@ -68,45 +69,58 @@ class ChatCard extends StatelessWidget {
             chat.messages.last.read == 0 &&
                     chat.messages.last.userId != provider.user.id
                 ? Text(
-            chat.messages.last.body == 'angebotNotification'
-            ? 'angebot'
-            :chat.messages.last.body.split('.').last == 'pdf'
-            ? 'PDF'
-            :chat.messages.last.body == 'just_img_no_text'
-            ? 'Bild'
-            :chat.messages.last.body.split(':')[0] == 'http'
-            ? 'Bild'
-            :chat.messages.last.body == 'just_pdf_no_text'
-            ? 'PDF'
-            : chat.messages.last.body == 'just_offer_no_text'
-            ? 'angebot'
-            : chat.messages.last.body != null && chat.messages.last.body != 'just_img_no_text'
-              && chat.messages.last.body != 'just_pdf_no_text' && chat.messages.last.body != 'just_offer_no_text'
-            ? chat.messages.last.body
-            : 'document',
+                    chat.messages.last.body == 'angebotNotification'
+                        ? 'angebot'
+                        : chat.messages.last.body.split('.').last == 'pdf'
+                            ? 'PDF'
+                            : chat.messages.last.body == 'just_img_no_text'
+                                ? 'Bild'
+                                : chat.messages.last.body.split(':')[0] ==
+                                        'http'
+                                    ? 'Bild'
+                                    : chat.messages.last.body ==
+                                            'just_pdf_no_text'
+                                        ? 'PDF'
+                                        : chat.messages.last.body ==
+                                                'just_offer_no_text'
+                                            ? 'angebot'
+                                            : chat.messages.last.body != null &&
+                                                    chat.messages.last.body !=
+                                                        'just_img_no_text' &&
+                                                    chat.messages.last.body !=
+                                                        'just_pdf_no_text' &&
+                                                    chat.messages.last.body !=
+                                                        'just_offer_no_text'
+                                                ? chat.messages.last.body
+                                                : 'document',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
                     ),
                   )
-                : Text(
-            chat.messages.last.body == 'angebotNotification'
-            ? 'angebot'
-            :chat.messages.last.body.split('.').last == 'pdf'
-            ? 'PDF'
-            :chat.messages.last.body == 'just_img_no_text' 
-            ? 'Bild'
-            :chat.messages.last.body.split(':')[0] == 'http'
-            ? 'Bild'
-            :chat.messages.last.body == 'just_pdf_no_text'
-            ? 'PDF'
-            : chat.messages.last.body == 'just_offer_no_text'
-            ? 'angebot'
-            : chat.messages.last.body != null && chat.messages.last.body != 'just_img_no_text'
-              && chat.messages.last.body != 'just_pdf_no_text' && chat.messages.last.body != 'just_offer_no_text'
-            ? chat.messages.last.body
-            : 'document'),
+                : Text(chat.messages.last.body == 'angebotNotification'
+                    ? 'angebot'
+                    : chat.messages.last.body.split('.').last == 'pdf'
+                        ? 'PDF'
+                        : chat.messages.last.body == 'just_img_no_text'
+                            ? 'Bild'
+                            : chat.messages.last.body.split(':')[0] == 'http'
+                                ? 'Bild'
+                                : chat.messages.last.body == 'just_pdf_no_text'
+                                    ? 'PDF'
+                                    : chat.messages.last.body ==
+                                            'just_offer_no_text'
+                                        ? 'angebot'
+                                        : chat.messages.last.body != null &&
+                                                chat.messages.last.body !=
+                                                    'just_img_no_text' &&
+                                                chat.messages.last.body !=
+                                                    'just_pdf_no_text' &&
+                                                chat.messages.last.body !=
+                                                    'just_offer_no_text'
+                                            ? chat.messages.last.body
+                                            : 'document'),
             newMessages != 0
                 ? Container(
                     //margin: const EdgeInsets.all(30.0),
@@ -127,6 +141,6 @@ class ChatCard extends StatelessWidget {
                   )
                 : Text(''),
           ]),
-    );
+    ));
   }
 }
