@@ -11,7 +11,7 @@ class ChatProvider extends BaseProvider {
   List<Chat> get chats => _chats;
 
   Future<List<Chat>> getChats() async {
-    if (_chats.isNotEmpty) return _chats;
+    if (_chats.isNotEmpty) return sortChats(_chats);
     setBusy(true);
     var response = await _chatService.getChats();
 
@@ -22,7 +22,7 @@ class ChatProvider extends BaseProvider {
       notifyListeners();
       setBusy(false);
     }
-    return _chats;
+    return sortChats(_chats);
   }
 
   updateSeenedMessages(chatId) {
@@ -76,20 +76,16 @@ class ChatProvider extends BaseProvider {
   }
 
   addMessageToChat(int chatId, ChatMessage message) {
-    var chats = _chats.firstWhere((chat) => chat.id == chatId);
-    chats.messages.add(message);
-    //print(chats.id);
-    toTheTop(chats);
+    Chat chat = _chats.singleWhere((chat) => chat.id == chatId);
+    chat.messages.add(message);
+    sortChats(_chats);
     notifyListeners();
   }
 
-  toTheTop(Chat chat) {
-    var index = _chats.indexOf(chat);
-
-    for (var i = index; i > 0; i--) {
-      var x = _chats[i] = _chats[i - 1];
-      _chats[i - 1] = x;
-    }
+  Future<List<Chat>> sortChats(List<Chat> chats) async {
+    chats.sort((b, a) =>
+        a.messages.last.createdAt.compareTo(b.messages.last.createdAt));
+    return chats;
   }
 
   Future<void> storeChat(String userId, String message, String carId) async {
